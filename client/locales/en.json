@@ -1,0 +1,44 @@
+{
+  "app": {
+    "subtitle": "Upload, customize, and preview fonts in real-time"
+  },
+  "language": {
+    "english": "English",
+    "khmer": "ខ្មែរ"
+  },
+  "upload": {
+    "title": "Upload Fonts",
+    "selectFiles": "Click to select fonts",
+    "supportedFormats": "TTF, OTF, WOFF, WOFF2",
+    "selectFolder": "Or select folder",
+    "folderDescription": "Upload multiple fonts at once",
+    "fontsLoaded": "fonts loaded",
+    "fontsNotLoaded": "Fonts Could Not Be Loaded",
+    "skippedFonts": "fonts were skipped because file size exceeded the limit."
+  },
+  "search": {
+    "title": "Search Fonts",
+    "placeholder": "Search by font name...",
+    "clearAll": "Clear All",
+    "found": "found"
+  },
+  "preview": {
+    "title": "Preview Text",
+    "placeholder": "Enter English text to preview..."
+  },
+  "font": {
+    "font": "Font",
+    "copyName": "Copy Name",
+    "copied": "Copied!",
+    "showing": "Showing",
+    "of": "of",
+    "noFontsUploaded": "No fonts uploaded yet",
+    "uploadFonts": "Upload fonts from your computer to get started",
+    "noFontsMatch": "No fonts match your search",
+    "prev": "Prev",
+    "next": "Next"
+  },
+  "footer": {
+    "text": "Font Preview Studio • View and customize fonts in real-time"
+  }
+}
