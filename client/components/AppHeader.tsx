@@ -18,10 +18,8 @@ export const AppHeader = ({ activeLanguage, onLanguageChange }: AppHeaderProps) 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
         <div className="flex items-center justify-between">
           <div>
-            <h1 className="text-3xl sm:text-4xl font-bold bg-gradient-to-r from-cyan-400 to-blue-500 bg-clip-text text-transparent">
-              FP
-            </h1>
-            <p className="text-slate-400 text-sm sm:text-base mt-1">
+            <img src="/logo.png" className="w-10 h-10" alt="Akson Logo" />
+            <p className="text-slate-400 text-sm sm:text-base mt-3">
               {t("app.subtitle")}
             </p>
           </div>

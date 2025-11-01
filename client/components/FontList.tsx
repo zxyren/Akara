@@ -46,7 +46,7 @@ export const FontList = ({
       <motion.div
         initial={{ opacity: 0, scale: 0.9 }}
         animate={{ opacity: 1, scale: 1 }}
-        className={`bg-gradient-to-br from-slate-800 to-slate-900 border border-slate-700 rounded-xl p-12 text-center flex items-center justify-center min-h-96 ${activeLanguage === "km" ? "font-kantumruy" : "font-poppins"}`}
+        className={`bg-gradient-to-br from-slate-800 to-slate-900 border border-slate-700 rounded-3xl p-12 text-center flex items-center justify-center min-h-96 ${activeLanguage === "km" ? "font-kantumruy" : "font-poppins"}`}
       >
         <div>
           <IconUpload className="w-16 h-16 mx-auto text-slate-600 mb-4" />
