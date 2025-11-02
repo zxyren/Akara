@@ -1,4 +1,4 @@
-import { motion } from "framer-motion";
+import { AnimatePresence, motion } from "framer-motion";
 import { useI18n, type Language } from "@/hooks/use-i18n";
 
 interface AppHeaderProps {
@@ -6,7 +6,10 @@ interface AppHeaderProps {
   onLanguageChange: (lang: Language) => void;
 }
 
-export const AppHeader = ({ activeLanguage, onLanguageChange }: AppHeaderProps) => {
+export const AppHeader = ({
+  activeLanguage,
+  onLanguageChange,
+}: AppHeaderProps) => {
   const { t } = useI18n(activeLanguage);
 
   return (
@@ -14,26 +17,42 @@ export const AppHeader = ({ activeLanguage, onLanguageChange }: AppHeaderProps) 
       initial={{ opacity: 0, y: -20 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.6 }}
-      className={`${activeLanguage === "km" ? "font-kantumruy" : "font-poppins"} border-b border-slate-700 bg-slate-900/50 backdrop-blur-md sticky top-0 z-50`}>
+      className={`${activeLanguage === "km" ? "font-kantumruy" : "font-poppins"} 
+        border-b border-slate-800 bg-slate-900/60 backdrop-blur-md sticky top-0 z-50`}
+    >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
         <div className="flex items-center justify-between">
+          {/* Left side: logo and subtitle */}
           <div>
             <img src="/logo.png" className="w-10 h-10" alt="Akson Logo" />
-            <p className="text-slate-400 text-sm sm:text-base mt-3">
-              {t("app.subtitle")}
-            </p>
           </div>
-          <div className="flex gap-2">
+
+          {/* Right side: Language toggle */}
+          <div className="flex items-center justify-center">
             <motion.button
-              whileHover={{ scale: 1.05 }}
+              whileHover={{ scale: 1.08 }}
               whileTap={{ scale: 0.95 }}
-              onClick={() => onLanguageChange(activeLanguage === "en" ? "km" : "en")}
-              className={`px-4 py-2 rounded-xl transition-all duration-200 ${activeLanguage === "en"
-                  ? "bg-blue-600 text-white"
-                  : "bg-slate-700 text-slate-200 hover:bg-slate-600"
-                }`}
+              onClick={() =>
+                onLanguageChange(activeLanguage === "en" ? "km" : "en")
+              }
+              className="relative flex items-center justify-center p-2 rounded-lg border border-slate-600 bg-slate-800/70 hover:bg-slate-700/70 transition-all duration-200 shadow-sm"
             >
-              {activeLanguage === "en" ? t("language.english") : t("language.khmer")}
+              <AnimatePresence mode="wait" initial={false}>
+                <motion.img
+                  key={activeLanguage}
+                  src={
+                    activeLanguage === "en"
+                      ? "https://upload.wikimedia.org/wikipedia/commons/8/83/Flag_of_the_United_Kingdom_%283-5%29.svg"
+                      : "https://upload.wikimedia.org/wikipedia/commons/8/83/Flag_of_Cambodia.svg"
+                  }
+                  alt={activeLanguage === "en" ? "English" : "Khmer"}
+                  className="w-8 h-6 rounded"
+                  initial={{ opacity: 0, y: -8 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0, y: 8 }}
+                  transition={{ duration: 0.2 }}
+                />
+              </AnimatePresence>
             </motion.button>
           </div>
         </div>

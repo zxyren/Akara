@@ -1,11 +1,4 @@
 {
-  "app": {
-    "subtitle": "Upload, customize, and preview fonts in real-time"
-  },
-  "language": {
-    "english": "English",
-    "khmer": "ខ្មែរ"
-  },
   "upload": {
     "title": "Upload Fonts",
     "selectFiles": "Click to select fonts",
