@@ -85,9 +85,9 @@ export const FontCard = forwardRef<HTMLDivElement, FontCardProps>(({
       </div>
 
       <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.2 }} className="space-y-3">
-        {!loaded && <div className="text-slate-500 text-sm italic">Loading...</div>}
+        {!loaded && <div className="text-white text-sm italic">Loading...</div>}
         <div className="space-y-2" style={{ opacity: loaded ? 1 : 0.5 }}>
-          <p style={{ fontFamily: fontFam }} className="text-3xl text-slate-300 break-words">
+          <p style={{ fontFamily: fontFam }} className="text-3xl break-words">
             {previewText ? previewText.slice(0, 60) : ''}{previewText && previewText.length > 60 && '...'}
           </p>
         </div>

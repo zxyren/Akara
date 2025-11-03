@@ -35,18 +35,18 @@ export const AppHeader = ({
               onClick={() =>
                 onLanguageChange(activeLanguage === "en" ? "km" : "en")
               }
-              className="relative flex items-center justify-center p-2 rounded-lg border border-slate-600 bg-slate-800/70 hover:bg-slate-700/70 transition-all duration-200 shadow-sm"
+              className="relative flex items-center justify-center p-1 rounded-md border border-slate-600 bg-slate-800/70 hover:bg-slate-700/70 transition-all duration-200 shadow-sm"
             >
               <AnimatePresence mode="wait" initial={false}>
                 <motion.img
                   key={activeLanguage}
                   src={
                     activeLanguage === "en"
-                      ? "https://upload.wikimedia.org/wikipedia/commons/8/83/Flag_of_the_United_Kingdom_%283-5%29.svg"
-                      : "https://upload.wikimedia.org/wikipedia/commons/8/83/Flag_of_Cambodia.svg"
+                      ? "Flag_of_the_United_Kingdom.svg"
+                      : "Flag_of_Cambodia.svg"
                   }
                   alt={activeLanguage === "en" ? "English" : "Khmer"}
-                  className="w-8 h-6 rounded"
+                  className="w-8 h-5 rounded"
                   initial={{ opacity: 0, y: -8 }}
                   animate={{ opacity: 1, y: 0 }}
                   exit={{ opacity: 0, y: 8 }}
