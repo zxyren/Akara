@@ -46,7 +46,7 @@ export const AppHeader = ({
                       : "Flag_of_Cambodia.svg"
                   }
                   alt={activeLanguage === "en" ? "English" : "Khmer"}
-                  className="w-8 h-5 rounded"
+                  className="w-8 h-7 object-fit rounded"
                   initial={{ opacity: 0, y: -8 }}
                   animate={{ opacity: 1, y: 0 }}
                   exit={{ opacity: 0, y: 8 }}
