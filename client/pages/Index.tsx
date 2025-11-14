@@ -7,6 +7,7 @@ import { PreviewTextSection } from "@/components/PreviewTextSection";
 import { FontList } from "@/components/FontList";
 import { useI18n, type Language } from "@/hooks/use-i18n";
 import { validateFontFile, logFontDiagnostics } from "@/utils/fontValidator";
+import { IconInfoTriangleFilled } from "@tabler/icons-react";
 
 const DEFAULT_TEXTS = { en: "The quick brown fox jumps over the lazy dog", km: "ខ្ញុំស្រលាញ់ភាសាខ្មែរ និងវប្បធម៌របស់ខ្មែរ" };
 const ITEMS_PER_PAGE = 15;
@@ -134,7 +135,7 @@ export default function FontPreview() {
           } fixed inset-0 bg-black/70 flex items-center justify-center z-50 p-4`}>
           <div className="bg-slate-800 border border-slate-700 rounded-xl max-w-2xl w-full max-h-[80vh] overflow-hidden flex flex-col">
             <div className="p-6 border-b border-slate-700">
-              <h3 className="text-xl font-medium text-red-400">⚠️ {skippedFonts.length} {t("upload.skippedFonts")}</h3>
+              <h3 className="text-xl font-medium text-red-400"><IconInfoTriangleFilled size={24} className="text-yellow-500 inline-block mr-2" /> {skippedFonts.length} {t("upload.skippedFonts")}</h3>
               <p className="text-sm text-slate-400 mt-2">{t("upload.fontsNotLoaded")}</p>
             </div>
             <div className="flex-1 overflow-y-auto p-6">
@@ -161,8 +162,8 @@ export default function FontPreview() {
               <span className="text-sm text-cyan-300">Processing fonts...</span>
               <span className="text-sm text-cyan-300">{processProgress.current} / {processProgress.total}</span>
             </div>
-            <div className="w-full bg-slate-700 rounded-full h-2">
-              <div className="bg-cyan-500 h-2 rounded-full transition-all duration-300" style={{ width: `${(processProgress.current / processProgress.total) * 100}%` }} />
+            <div className="w-full bg-slate-700 rounded-full h-1">
+              <div className="bg-cyan-500 h-1 rounded-full transition-all duration-300" style={{ width: `${(processProgress.current / processProgress.total) * 100}%` }} />
             </div>
           </div>
         )}

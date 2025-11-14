@@ -1,6 +1,6 @@
 import { motion } from "framer-motion";
 import { useI18n, type Language } from "@/hooks/use-i18n";
-import { IconAlertHexagon, IconFileUpload, IconFolderFilled, IconFolderUp, IconUpload } from "@tabler/icons-react";
+import { IconArrowRight, IconFileUpload, IconFolderFilled, IconFolderUp, IconInfoTriangleFilled, IconUpload } from "@tabler/icons-react";
 
 interface UploadSectionProps {
   fontsCount: number;
@@ -76,12 +76,21 @@ export const UploadSection = ({
       </div>
 
       <div className="mt-4 space-y-2">
-        <div className="p-3 bg-slate-700/50 rounded-lg">
-          <p className="text-xs text-slate-400 flex items-center gap-1">
+        <motion.div
+          initial={{ opacity: 0, y: 10 }}
+          animate={{ opacity: 1, y: 0 }}
+          className="flex items-center justify-between px-4 py-3 bg-slate-900/50 border border-slate-700/30 rounded-xl"
+        >
+          <div className="flex items-center gap-2">
             <IconFolderFilled size={20} className="text-yellow-500" />
-            {fontsCount} {t("upload.fontsLoaded")}
-          </p>
-        </div>
+            <span className="text-sm text-slate-300 font-medium">
+              {fontsCount} {t("upload.fontsLoaded")}
+            </span>
+          </div>
+          {fontsCount > 0 && (
+            <div className="w-2 h-2 bg-green-500 rounded-full animate-pulse" />
+          )}
+        </motion.div>
 
         {skippedFontsCount > 0 && onShowSkipped && (
           <motion.button
@@ -93,12 +102,12 @@ export const UploadSection = ({
             className="w-full p-3 bg-red-900/30 border border-red-700/50 hover:bg-red-900/40 rounded-lg transition-colors flex items-center justify-between"
           >
             <div className="flex items-center gap-2">
-              <IconAlertHexagon size={20} className="text-red-400" />
+              <IconInfoTriangleFilled size={20} className="text-yellow-400" />
               <span className="text-sm text-red-300 font-medium">
                 {skippedFontsCount} font{skippedFontsCount > 1 ? 's' : ''} couldn't be loaded
               </span>
             </div>
-            <span className="text-xs text-red-400">View →</span>
+            <span className="text-xs flex space-y-5 text-red-400">View<IconArrowRight size={16} /></span>
           </motion.button>
         )}
       </div>

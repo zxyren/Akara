@@ -2,7 +2,7 @@ import { motion } from "framer-motion";
 import { useEffect, useRef, useState, forwardRef } from "react";
 import type { LoadedFont } from "@/types/font";
 import { useI18n, type Language } from "@/hooks/use-i18n";
-import { IconClipboardCheck, IconClipboard, IconX } from "@tabler/icons-react";
+import { IconClipboardCheck, IconClipboard, IconX, IconFileTypography } from "@tabler/icons-react";
 
 interface FontCardProps {
   font: LoadedFont;
@@ -53,64 +53,105 @@ export const FontCard = forwardRef<HTMLDivElement, FontCardProps>(({
         setTimeout(() => setLoaded(true), 500);
       }
     }
-    return () => { 
+    return () => {
       if (styleRef.current && document.head.contains(styleRef.current)) {
         document.head.removeChild(styleRef.current);
       }
     };
   }, [font.fontData, font.name, getFontFormat, fontFam]);
 
+  const fontClass = activeLanguage === "km" ? "font-kantumruy" : "font-poppins";
+
   return (
     <motion.div
       ref={ref}
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
-      exit={{ opacity: 0, y: -20 }}
+      exit={{ opacity: 0, scale: 0.95 }}
       transition={{ duration: 0.3 }}
-      className={`${
-    activeLanguage === "km" ? "font-kantumruy" : "font-poppins"
-  } bg-slate-800 border border-slate-700 my-3 rounded-3xl p-6 hover:border-slate-600 transition-colors`}
+      className={`${fontClass} group relative overflow-hidden bg-gradient-to-br from-slate-800/90 to-slate-900/90 backdrop-blur-sm border border-slate-700/50 rounded-2xl p-6 hover:border-slate-600/80 hover:shadow-xl hover:shadow-slate-900/20 transition-all`}
     >
-      <div className="flex items-start justify-between mb-4">
-        <div className="flex-1 border-b border-slate-700 pb-1">
-          <div className="flex items-center gap-2 flex-wrap">
-            <h3 className="font-medium text-slate-200 break-all">{font.name}</h3>
-            <span className="px-2 py-1 bg-slate-700 rounded-lg text-xs text-cyan-300 font-mono flex-shrink-0">.{ext}</span>
+      {/* Subtle gradient overlay on hover */}
+      <div className="absolute inset-0 bg-gradient-to-br from-blue-500/0 to-purple-500/0 group-hover:from-blue-500/5 group-hover:to-purple-500/5 transition-all duration-500" />
+
+      {/* Header */}
+      <div className="relative flex items-start justify-between mb-5 pb-4 border-b border-slate-700/50">
+        <div className="flex-1 min-w-0">
+          <div className="flex items-center gap-2 mb-2">
+            <div className="p-1.5 bg-slate-700/50 rounded-lg">
+              <IconFileTypography size={23} className="text-blue-400" strokeWidth={2} />
+            </div>
+            <h3 className="font-medium text-slate-100 truncate">{font.name}</h3>
+            <span className="px-2 py-0.5 bg-gradient-to-r from-cyan-500/20 to-blue-500/20 border border-cyan-500/30 rounded-md text-xs text-cyan-300 font-mono uppercase tracking-wide">{ext}</span>
           </div>
-          <p className="text-xs text-slate-400 mt-1">{font.fontFamily}</p>
+          <p className="text-xs text-slate-400 truncate pl-8">{font.fontFamily}</p>
         </div>
-        <motion.button whileHover={{ scale: 1.1 }} whileTap={{ scale: 0.95 }} onClick={() => onRemove(fontIndex)} className="p-2 hover:bg-slate-700 rounded-lg transition-colors flex-shrink-0">
-          <IconX size={23} className="text-slate-400" />
+
+        <motion.button
+          whileHover={{ scale: 1.1, rotate: 90 }}
+          whileTap={{ scale: 0.9 }}
+          onClick={() => onRemove(fontIndex)}
+          className="p-2 hover:bg-red-500/10 rounded-lg transition-colors group/btn"
+        >
+          <IconX size={20} className="text-slate-400 group-hover/btn:text-red-400 transition-colors" />
         </motion.button>
       </div>
 
-      <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.2 }} className="space-y-3">
-        {!loaded && <div className="text-white text-sm italic">Loading...</div>}
-        <div className="space-y-2" style={{ opacity: loaded ? 1 : 0.5 }}>
-          <p style={{ fontFamily: fontFam }} className="text-3xl break-words">
-            {previewText ? previewText.slice(0, 60) : ''}{previewText && previewText.length > 60 && '...'}
+      {/* Preview Section */}
+      <div className="relative space-y-4">
+        {!loaded && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            className="flex items-center gap-2 text-slate-400 text-sm"
+          >
+            <div className="w-1.5 h-1.5 bg-blue-400 rounded-full animate-pulse" />
+            Loading font...
+          </motion.div>
+        )}
+
+        <div
+          className="relative bg-slate-900 rounded-xl p-5 min-h-[100px] flex items-center border border-slate-700/30"
+          style={{ opacity: loaded ? 1 : 0.4 }}
+        >
+          <p
+            style={{ fontFamily: fontFam }}
+            className="text-3xl text-white leading-snug"
+          >
+            {previewText ? previewText.slice(0, 60) : ''}
+            {previewText && previewText.length > 60 && '...'}
           </p>
         </div>
 
-        <div className="flex flex-wrap gap-2 pt-3 border-slate-700">
-          <motion.button whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }} onClick={() => onCopy(font.name)} className="flex items-center gap-2 px-3 py-1 text-xs bg-slate-700 hover:bg-slate-600 rounded-lg transition-colors">
+        {/* Actions */}
+        <div className="flex items-center justify-between gap-3">
+          <motion.button
+            whileHover={{ scale: 1.02 }}
+            whileTap={{ scale: 0.98 }}
+            onClick={() => onCopy(font.name)}
+            className="flex items-center gap-2 px-4 py-2 bg-slate-700/50 hover:bg-slate-700 rounded-lg transition-all text-sm font-medium"
+          >
             {copied === font.name ? (
               <>
                 <IconClipboardCheck size={16} className="text-green-400" />
-                {t("font.copied")}
+                <span className="text-green-400">{t("font.copied")}</span>
               </>
             ) : (
               <>
-                <IconClipboard size={16} />
-                {t("font.copyName")}
+                <IconClipboard size={16} className="text-slate-300" />
+                <span className="text-slate-300">{t("font.copyName")}</span>
               </>
             )}
           </motion.button>
-          <span className="text-xs text-slate-400 px-3 py-1 bg-slate-700/50 rounded-lg">
-            {(font.file.size / 1024).toFixed(2)} KB
-          </span>
+
+          <div className="flex items-center gap-2 px-3 py-2 bg-slate-900/50 border border-slate-700/30 rounded-lg">
+            <div className="w-1.5 h-1.5 bg-emerald-400 rounded-full animate-pulse" />
+            <span className="text-xs text-slate-300 font-medium">
+              {(font.file.size / 1024).toFixed(2)} KB
+            </span>
+          </div>
         </div>
-      </motion.div>
+      </div>
     </motion.div>
   );
 });
