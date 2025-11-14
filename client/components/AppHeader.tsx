@@ -1,4 +1,4 @@
-import { AnimatePresence, motion } from "framer-motion";
+import { motion } from "framer-motion";
 import { useI18n, type Language } from "@/hooks/use-i18n";
 
 interface AppHeaderProps {
@@ -22,38 +22,44 @@ export const AppHeader = ({
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
         <div className="flex items-center justify-between">
-          {/* Left side: logo and subtitle */}
+          {/* Left side: logo */}
           <div>
             <img src="/logo.png" className="w-10 h-10" alt="Akson Logo" />
           </div>
 
-          {/* Right side: Language toggle */}
-          <div className="flex items-center justify-center">
-            <motion.button
-              whileHover={{ scale: 1.08 }}
-              whileTap={{ scale: 0.95 }}
-              onClick={() =>
-                onLanguageChange(activeLanguage === "en" ? "km" : "en")
-              }
-              className="relative flex items-center justify-center p-1 rounded-md border border-slate-600 bg-slate-800/70 hover:bg-slate-700/70 transition-all duration-200 shadow-sm"
+          {/* Right side: Language toggle - Minimal Underline */}
+          <div className="flex items-center gap-6">
+            <button
+              onClick={() => onLanguageChange("en")}
+              className="relative pb-2 text-base font-medium transition-colors"
             >
-              <AnimatePresence mode="wait" initial={false}>
-                <motion.img
-                  key={activeLanguage}
-                  src={
-                    activeLanguage === "en"
-                      ? "Flag_of_the_United_Kingdom.svg"
-                      : "Flag_of_Cambodia.svg"
-                  }
-                  alt={activeLanguage === "en" ? "English" : "Khmer"}
-                  className="w-8 h-7 object-fit rounded"
-                  initial={{ opacity: 0, y: -8 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  exit={{ opacity: 0, y: 8 }}
-                  transition={{ duration: 0.2 }}
+              <span className={activeLanguage === "en" ? "text-white" : "text-slate-500 hover:text-slate-400"}>
+                EN
+              </span>
+              {activeLanguage === "en" && (
+                <motion.div
+                  layoutId="language-underline"
+                  className="absolute bottom-0 left-0 right-0 h-0.5 bg-gradient-to-r from-blue-500 to-cyan-500"
+                  transition={{ type: "spring", stiffness: 300, damping: 30 }}
                 />
-              </AnimatePresence>
-            </motion.button>
+              )}
+            </button>
+
+            <button
+              onClick={() => onLanguageChange("km")}
+              className="relative pb-2 text-base font-medium transition-colors"
+            >
+              <span className={activeLanguage === "km" ? "text-white" : "text-slate-500 hover:text-slate-400"}>
+                KM
+              </span>
+              {activeLanguage === "km" && (
+                <motion.div
+                  layoutId="language-underline"
+                  className="absolute bottom-0 left-0 right-0 h-0.5 bg-gradient-to-r from-blue-500 to-cyan-500"
+                  transition={{ type: "spring", stiffness: 300, damping: 30 }}
+                />
+              )}
+            </button>
           </div>
         </div>
       </div>
