@@ -104,10 +104,12 @@ export const UploadSection = ({
             <div className="flex items-center gap-2">
               <IconInfoTriangleFilled size={20} className="text-yellow-400" />
               <span className="text-sm text-red-300 font-medium">
-                {skippedFontsCount} font{skippedFontsCount > 1 ? 's' : ''} couldn't be loaded
+                {skippedFontsCount} {t("font.font")}
+                {activeLanguage === "en" && skippedFontsCount > 1 ? "s " : " "}
+                {t("upload.fontsNotLoaded")}
               </span>
             </div>
-            <span className="text-xs flex space-y-5 text-red-400">View<IconArrowRight size={16} /></span>
+            <span className="text-xs flex space-y-5 text-red-400">{t("upload.view")}<IconArrowRight size={16} /></span>
           </motion.button>
         )}
       </div>

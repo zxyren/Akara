@@ -1,12 +1,13 @@
 {
   "upload": {
     "title": "Upload Fonts",
+    "view": "View",
     "selectFiles": "Click to select fonts",
     "supportedFormats": "TTF, OTF, WOFF, WOFF2",
     "selectFolder": "Or select folder",
     "folderDescription": "Upload multiple fonts at once",
     "fontsLoaded": "fonts loaded",
-    "fontsNotLoaded": "Fonts Could Not Be Loaded",
+    "fontsNotLoaded": "Could Not Be Loaded",
     "skippedFonts": "fonts were skipped because file size exceeded the limit."
   },
   "search": {

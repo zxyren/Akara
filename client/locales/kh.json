@@ -1,18 +1,19 @@
 {
   "upload": {
     "title": "បង្ហោះពុម្ពអក្សរ",
+    "view": "មើល",
     "selectFiles": "ចុចដើម្បីជ្រើសរើសពុម្ព",
     "supportedFormats": "TTF, OTF, WOFF, WOFF2",
     "selectFolder": "ឬជ្រើសរើសថត",
     "folderDescription": "បង្ហោះពុម្ពអក្សរច្រើនក្នុងពេលតែមួយ",
     "fontsLoaded": "ពុម្ពដែលបានផ្ទុក",
-    "fontsNotLoaded": "ពុម្ពអក្សរមិនអាចផ្ទុកបាន",
+    "fontsNotLoaded": "មិនអាចផ្ទុកបាន",
     "skippedFonts": "ពុម្ពអក្សរត្រូវបានរំលងដោយសារតែទំហំឯកសារលើសកំណត់"
   },
   "search": {
     "title": "ស្វែងរកពុម្ពអក្សរ",
     "placeholder": "ស្វែងរកតាមឈ្មោះពុម្ព​​...",
-    "clearAll": "លុបចេញទាំងអស់",
+    "clearAll": "សម្អាតទាំងអស់",
     "found": "រកឃើញ"
   },
   "preview": {
