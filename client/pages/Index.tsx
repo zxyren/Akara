@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import type { LoadedFont } from "@/types/font";
 import { AppHeader } from "@/components/AppHeader";
 import { UploadSection } from "@/components/UploadSection";
@@ -7,6 +7,7 @@ import { PreviewTextSection } from "@/components/PreviewTextSection";
 import { FontList } from "@/components/FontList";
 import { useI18n, type Language } from "@/hooks/use-i18n";
 import { validateFontFile, logFontDiagnostics } from "@/utils/fontValidator";
+import { saveFontsToStorage, loadFontsFromStorage, clearFontsFromStorage } from "@/utils/fontStorage";
 import { IconInfoTriangleFilled } from "@tabler/icons-react";
 
 const DEFAULT_TEXTS = { en: "The quick brown fox jumps over the lazy dog", km: "ខ្ញុំស្រលាញ់ភាសាខ្មែរ និងវប្បធម៌របស់ខ្មែរ" };
@@ -17,7 +18,10 @@ const BATCH_SIZE = 20;
 export default function FontPreview() {
   const [fonts, setFonts] = useState<LoadedFont[]>([]);
   const [previewText, setPreviewText] = useState(DEFAULT_TEXTS);
-  const [activeLanguage, setActiveLanguage] = useState<Language>("en");
+  const [activeLanguage, setActiveLanguage] = useState<Language>(() => {
+    const saved = localStorage.getItem("preferredLanguage");
+    return (saved as Language) || "en";
+  });
   const [copied, setCopied] = useState<string | null>(null);
   const [searchQuery, setSearchQuery] = useState("");
   const [currentPage, setCurrentPage] = useState(1);
@@ -25,8 +29,30 @@ export default function FontPreview() {
   const [processProgress, setProcessProgress] = useState({ current: 0, total: 0 });
   const [skippedFonts, setSkippedFonts] = useState<Array<{ name: string, reason: string }>>([]);
   const [showSkippedModal, setShowSkippedModal] = useState(false);
+  const [isLoadingFromStorage, setIsLoadingFromStorage] = useState(true);
 
   const { t } = useI18n(activeLanguage);
+
+  // Load fonts from IndexedDB on mount
+  useEffect(() => {
+    const loadStoredFonts = async () => {
+      setIsLoadingFromStorage(true);
+      const storedFonts = await loadFontsFromStorage();
+      if (storedFonts.length > 0) {
+        setFonts(storedFonts);
+      }
+      setIsLoadingFromStorage(false);
+    };
+    loadStoredFonts();
+  }, []);
+
+  // Save fonts to IndexedDB whenever fonts array changes
+  useEffect(() => {
+    if (!isLoadingFromStorage) {
+      saveFontsToStorage(fonts);
+    }
+  }, [fonts, isLoadingFromStorage]);
+
   const getFileExtension = (filename: string) => filename.split(".").pop()?.toLowerCase() || "";
   const getFontFormat = (filename: string): string => {
     const formatMap: { [key: string]: string } = { ttf: "truetype", otf: "opentype", woff: "woff", woff2: "woff2" };
@@ -124,8 +150,27 @@ export default function FontPreview() {
   const removeFont = (index: number) => setFonts((prev) => prev.filter((_, i) => i !== index));
   const copyFontName = (name: string) => { navigator.clipboard.writeText(name); setCopied(name); setTimeout(() => setCopied(null), 2000); };
   const handleSearch = (query: string) => { setSearchQuery(query); setCurrentPage(1); };
-  const handleClearAll = () => { setFonts([]); setSearchQuery(""); setCurrentPage(1); };
-  const handleLanguageChange = (lang: Language) => { try { setActiveLanguage(lang); setCurrentPage(1); } catch (error) { console.error("Error changing language:", error); } };
+  const handleClearAll = async () => { 
+    setFonts([]); 
+    setSearchQuery(""); 
+    setCurrentPage(1); 
+    await clearFontsFromStorage();
+  };
+  const handleLanguageChange = (lang: Language) => {
+    setActiveLanguage(lang);
+    localStorage.setItem("preferredLanguage", lang);
+  };
+
+  if (isLoadingFromStorage) {
+    return (
+      <div className="min-h-screen bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 text-white font-poppins flex items-center justify-center">
+        <div className="text-center">
+          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-cyan-500 mx-auto mb-4"></div>
+          <p className="text-slate-400">Loading fonts...</p>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 text-white font-poppins">
