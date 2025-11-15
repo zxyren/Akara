@@ -45,7 +45,7 @@ export const FontList = ({
     <motion.div
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
-      className={`${fontClass} relative overflow-hidden bg-gradient-to-br from-slate-900/50 via-slate-800/30 to-slate-900/50 backdrop-blur-sm border border-slate-700/50 rounded-2xl p-16 text-center min-h-[400px] flex items-center justify-center`}
+      className={`${fontClass} relative overflow-hidden bg-gradient-to-br from-slate-900/50 via-slate-800/30 to-slate-900/50 backdrop-blur-sm border border-slate-700/50 rounded-3xl p-16 text-center min-h-[400px] flex items-center justify-center`}
     >
       <div className="absolute inset-0 bg-gradient-to-r from-blue-500/5 via-purple-500/5 to-pink-500/5 animate-pulse" />
       <div className="absolute top-10 right-10 w-32 h-32 bg-blue-500/10 rounded-full blur-3xl" />
@@ -58,10 +58,8 @@ export const FontList = ({
     return (
       <EmptyCard>
         <div className="relative z-10">
-          <motion.div initial={{ scale: 0 }} animate={{ scale: 1 }} className="mb-6 inline-flex w-20 h-20 rounded-2xl bg-gradient-to-br from-slate-700 to-slate-800 border border-slate-600/50 shadow-xl items-center justify-center">
-            <IconUpload className="w-10 h-10 text-slate-400" strokeWidth={1.5} />
-          </motion.div>
-          <h3 className="text-2xl font-semibold text-slate-200 mb-3">{t("font.noFontsUploaded")}</h3>
+          <img src="/Upload-amico.svg" alt="upload" className="mx-auto w-48 h-48" />
+          <h3 className="text-2xl font-medium text-slate-200 mb-3">{t("font.noFontsUploaded")}</h3>
           <p className="text-slate-400">{t("font.uploadFonts")}</p>
         </div>
       </EmptyCard>
@@ -72,7 +70,7 @@ export const FontList = ({
     return (
       <EmptyCard>
         <div className="relative z-10">
-          <motion.div animate={{ rotate: [0, 10, -10, 0] }} transition={{ duration: 2, repeat: Infinity }} className="mb-5 text-6xl">🔍</motion.div>
+          <img src="/Questions-bro.svg" alt="Search" className="mx-auto w-48 h-w-48" />
           <p className="text-slate-300 text-lg font-medium">{t("font.noFontsMatch")}</p>
         </div>
       </EmptyCard>

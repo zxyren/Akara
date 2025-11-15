@@ -1,6 +1,6 @@
 import { motion } from "framer-motion";
 import { useI18n, type Language } from "@/hooks/use-i18n";
-import { IconArrowRight, IconFileUpload, IconFolderFilled, IconFolderUp, IconInfoTriangleFilled, IconUpload } from "@tabler/icons-react";
+import { IconArrowRight, IconFolderFilled, IconInfoTriangleFilled, IconUpload } from "@tabler/icons-react";
 
 interface UploadSectionProps {
   fontsCount: number;
@@ -34,7 +34,11 @@ export const UploadSection = ({
             whileHover={{ borderColor: "rgb(34, 211, 238)" }}
             className="border-2 border-dashed border-slate-600 rounded-2xl p-6 text-center cursor-pointer transition-colors hover:bg-slate-700/30"
           >
-            <IconFileUpload size={32} className="mx-auto mb-2 text-slate-400" />
+            <img
+              src="/upload-cloud-file.png"
+              alt="Upload file"
+              className="mx-auto mb-2 w-16 h-w-16 object-contain"
+            />
             <p className="text-sm font-medium text-slate-300">
               {t("upload.selectFiles")}
             </p>
@@ -56,7 +60,11 @@ export const UploadSection = ({
             whileHover={{ borderColor: "rgb(34, 211, 238)" }}
             className="border-2 border-dashed border-slate-600 rounded-2xl p-6 text-center cursor-pointer transition-colors hover:bg-slate-700/30"
           >
-            <IconFolderUp size={32} className="mx-auto mb-2 text-slate-400" />
+            <img
+              src="/upload-cloud-folder.png"
+              alt="Upload folder"
+              className="mx-auto mb-2 w-16 h-16 object-contain"
+            />
             <p className="text-sm font-medium text-slate-300">
               {t("upload.selectFolder")}
             </p>
@@ -82,7 +90,7 @@ export const UploadSection = ({
           className="flex items-center justify-between px-4 py-3 bg-slate-900/50 border border-slate-700/30 rounded-xl"
         >
           <div className="flex items-center gap-2">
-            <IconFolderFilled size={20} className="text-yellow-500" />
+            <img src="/alphabet-folder.png" alt="Folder" className="mx-auto mb-2 w-8 h-w-8 object-contain" />
             <span className="text-sm text-slate-300 font-medium">
               {fontsCount} {t("upload.fontsLoaded")}
             </span>
