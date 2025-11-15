@@ -1,7 +1,13 @@
 import { useState, useEffect } from "react";
 import type { LoadedFont } from "@/types/font";
 import { validateFontFile, logFontDiagnostics } from "@/utils/fontValidator";
-import { saveFontsToStorage, loadFontsFromStorage, clearFontsFromStorage } from "@/utils/fontStorage";
+import {
+  saveFontsToStorage,
+  loadFontsFromStorage,
+  clearFontsFromStorage,
+  saveSkippedFontsToStorage,
+  loadSkippedFontsFromStorage,
+} from "@/utils/fontStorage";
 
 const MAX_FILE_SIZE = 5 * 1024 * 1024;
 const BATCH_SIZE = 20;
@@ -9,21 +15,35 @@ const BATCH_SIZE = 20;
 export const useFontManager = () => {
   const [fonts, setFonts] = useState<LoadedFont[]>([]);
   const [isProcessing, setIsProcessing] = useState(false);
-  const [processProgress, setProcessProgress] = useState({ current: 0, total: 0 });
-  const [skippedFonts, setSkippedFonts] = useState<Array<{ name: string; reason: string }>>([]);
+  const [processProgress, setProcessProgress] = useState({
+    current: 0,
+    total: 0,
+  });
+  const [skippedFonts, setSkippedFonts] = useState<
+    Array<{ name: string; reason: string }>
+  >([]);
   const [isLoadingFromStorage, setIsLoadingFromStorage] = useState(true);
 
   // Load fonts from IndexedDB on mount
   useEffect(() => {
-    const loadStoredFonts = async () => {
+    const loadStoredData = async () => {
       setIsLoadingFromStorage(true);
-      const storedFonts = await loadFontsFromStorage();
+      const [storedFonts, storedSkippedFonts] = await Promise.all([
+        loadFontsFromStorage(),
+        loadSkippedFontsFromStorage(), // NEW
+      ]);
+
       if (storedFonts.length > 0) {
         setFonts(storedFonts);
       }
+
+      if (storedSkippedFonts.length > 0) {
+        setSkippedFonts(storedSkippedFonts); // NEW
+      }
+
       setIsLoadingFromStorage(false);
     };
-    loadStoredFonts();
+    loadStoredData();
   }, []);
 
   // Save fonts to IndexedDB whenever fonts array changes
@@ -33,7 +53,9 @@ export const useFontManager = () => {
     }
   }, [fonts, isLoadingFromStorage]);
 
-  const processFontFile = (file: File): Promise<LoadedFont | { error: string } | null> => {
+  const processFontFile = (
+    file: File,
+  ): Promise<LoadedFont | { error: string } | null> => {
     return new Promise((resolve) => {
       if (file.size > MAX_FILE_SIZE) {
         resolve({
@@ -85,7 +107,9 @@ export const useFontManager = () => {
     setIsProcessing(true);
     setProcessProgress({ current: 0, total: files.length });
     const skipped: Array<{ name: string; reason: string }> = [];
-    const fontFiles = files.filter((file) => /\.(ttf|otf|woff|woff2)$/i.test(file.name));
+    const fontFiles = files.filter((file) =>
+      /\.(ttf|otf|woff|woff2)$/i.test(file.name),
+    );
 
     try {
       for (let i = 0; i < fontFiles.length; i += BATCH_SIZE) {
@@ -97,7 +121,7 @@ export const useFontManager = () => {
             } catch (err) {
               return { error: "Unexpected error" };
             }
-          })
+          }),
         );
 
         const validFonts: LoadedFont[] = [];
@@ -118,7 +142,9 @@ export const useFontManager = () => {
       }
     } catch (error) {
       console.error("Fatal error during batch processing:", error);
-      alert("An error occurred while processing fonts. Some fonts may not have loaded.");
+      alert(
+        "An error occurred while processing fonts. Some fonts may not have loaded.",
+      );
     }
 
     setIsProcessing(false);
@@ -132,6 +158,7 @@ export const useFontManager = () => {
 
   const clearAllFonts = async () => {
     setFonts([]);
+    setSkippedFonts([]); // Clear skipped fonts too
     await clearFontsFromStorage();
   };
 
