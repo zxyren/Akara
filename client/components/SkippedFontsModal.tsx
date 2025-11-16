@@ -18,7 +18,7 @@ export const SkippedFontsModal = ({
   return (
     <div
       className={`${
-        activeLanguage === "km" ? "font-kantumruy" : "font-poppins"
+        activeLanguage === "km" ? "font-inter-khmer" : "font-poppins"
       } fixed inset-0 bg-black/70 flex items-center justify-center z-50 p-4`}
     >
       <div className="bg-slate-800 border border-slate-700 rounded-xl max-w-2xl w-full max-h-[80vh] overflow-hidden flex flex-col">

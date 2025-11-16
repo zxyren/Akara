@@ -1,6 +1,6 @@
 import { motion } from "framer-motion";
 import { useI18n, type Language } from "@/hooks/use-i18n";
-import { IconArrowRight, IconFolderFilled, IconInfoTriangleFilled, IconUpload } from "@tabler/icons-react";
+import { IconArrowRight, IconInfoTriangleFilled } from "@tabler/icons-react";
 
 interface UploadSectionProps {
   fontsCount: number;
@@ -22,9 +22,8 @@ export const UploadSection = ({
   const { t } = useI18n(activeLanguage);
 
   return (
-    <div className={`bg-slate-800 border border-slate-700 rounded-xl p-6 ${activeLanguage === "km" ? "font-kantumruy" : "font-poppins"}`}>
+    <div className={`bg-slate-800 border border-slate-700 rounded-xl p-6 ${activeLanguage === "km" ? "font-inter-khmer" : "font-poppins"}`}>
       <h2 className="text-xl font-medium mb-4 flex items-center gap-2">
-        <IconUpload size={20} className="text-cyan-400" />
         {t("upload.title")}
       </h2>
 
@@ -90,8 +89,8 @@ export const UploadSection = ({
           className="flex items-center justify-between px-4 py-3 bg-slate-900/50 border border-slate-700/30 rounded-xl"
         >
           <div className="flex items-center gap-2">
-            <img src="/alphabet-folder.png" alt="Folder" className="mx-auto mb-2 w-8 h-w-8 object-contain" />
-            <span className="text-sm text-slate-300 font-medium">
+            <img src="/alphabet-folder.png" alt="Folder" className="w-8 h-8 object-contain" />
+            <span className="text-sm text-slate-300 font-normal">
               {fontsCount} {t("upload.fontsLoaded")}
             </span>
           </div>

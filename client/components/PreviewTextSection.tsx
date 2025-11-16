@@ -14,7 +14,7 @@ export const PreviewTextSection = ({
   const { t } = useI18n(activeLanguage);
 
   return (
-    <div className={`${activeLanguage === "km" ? "font-kantumruy" : "font-poppins"
+    <div className={`${activeLanguage === "km" ? "font-inter-khmer" : "font-poppins"
           } bg-slate-800 border border-slate-700 rounded-xl p-6`}>
       <h2 className="text-xl font-medium mb-4">{t("preview.title")}</h2>
       <textarea

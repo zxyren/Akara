@@ -17,7 +17,7 @@ export const AppHeader = ({
       initial={{ opacity: 0, y: -20 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.6 }}
-      className={`${activeLanguage === "km" ? "font-kantumruy" : "font-poppins"} 
+      className={`${activeLanguage === "km" ? "font-inter-khmer" : "font-poppins"} 
         border-b border-slate-800 bg-slate-900/60 backdrop-blur-md sticky top-0 z-50`}
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">

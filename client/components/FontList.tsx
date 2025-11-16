@@ -35,7 +35,7 @@ export const FontList = ({
   ITEMS_PER_PAGE,
 }: FontListProps) => {
   const { t } = useI18n(activeLanguage);
-  const fontClass = activeLanguage === "km" ? "font-kantumruy" : "font-poppins";
+  const fontClass = activeLanguage === "km" ? "font-inter-khmer" : "font-poppins";
   const totalPages = Math.ceil(filteredFonts.length / ITEMS_PER_PAGE);
   const startIndex = (currentPage - 1) * ITEMS_PER_PAGE;
   const endIndex = startIndex + ITEMS_PER_PAGE;

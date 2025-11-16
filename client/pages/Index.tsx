@@ -148,7 +148,7 @@ export default function FontPreview() {
 
       <footer
         className={`${
-          activeLanguage === "km" ? "font-kantumruy" : "font-poppins"
+          activeLanguage === "km" ? "font-inter-khmer" : "font-poppins"
         } border-t border-slate-700 bg-slate-900/50 backdrop-blur-md mt-12 sm:mt-16`}
       >
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 text-center text-slate-400 text-sm">

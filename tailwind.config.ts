@@ -7,7 +7,7 @@ export default {
   theme: {
     fontFamily: {
       poppins: ['Poppins', 'sans-serif'],
-      kantumruy: ['Kantumruy Pro', 'sans-serif'],
+      'inter-khmer': ['Inter Khmer', 'sans-serif'],
     },
     container: {
       center: true,

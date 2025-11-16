@@ -22,7 +22,7 @@ export const FontSearch = ({
   const { t } = useI18n(activeLanguage);
 
   return (
-    <div className={`${activeLanguage === "km" ? "font-kantumruy" : "font-poppins"
+    <div className={`${activeLanguage === "km" ? "font-inter-khmer" : "font-poppins"
           } bg-slate-800 border border-slate-700 rounded-xl p-6`}>
       <h2 className="text-xl font-medium mb-4 flex items-center gap-2">
         <IconSearch className="w-5 h-5 text-cyan-400" />

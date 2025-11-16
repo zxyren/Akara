@@ -60,7 +60,7 @@ export const FontCard = forwardRef<HTMLDivElement, FontCardProps>(({
     };
   }, [font.fontData, font.name, getFontFormat, fontFam]);
 
-  const fontClass = activeLanguage === "km" ? "font-kantumruy" : "font-poppins";
+  const fontClass = activeLanguage === "km" ? "font-inter-khmer" : "font-poppins";
 
   return (
     <motion.div
