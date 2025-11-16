@@ -38,10 +38,10 @@ export const UploadSection = ({
               alt="Upload file"
               className="mx-auto mb-2 w-16 h-w-16 object-contain"
             />
-            <p className="text-sm font-medium text-slate-300">
+            <p className="text-base font-medium text-slate-300">
               {t("upload.selectFiles")}
             </p>
-            <p className="text-xs text-slate-400 mt-1">
+            <p className="text-sm text-slate-400 mt-1">
               {t("upload.supportedFormats")}
             </p>
           </motion.div>
@@ -64,10 +64,10 @@ export const UploadSection = ({
               alt="Upload folder"
               className="mx-auto mb-2 w-16 h-16 object-contain"
             />
-            <p className="text-sm font-medium text-slate-300">
+            <p className="text-base font-medium text-slate-300">
               {t("upload.selectFolder")}
             </p>
-            <p className="text-xs text-slate-400 mt-1">
+            <p className="text-sm text-slate-400 mt-1">
               {t("upload.folderDescription")}
             </p>
           </motion.div>

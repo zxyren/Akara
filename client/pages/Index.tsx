@@ -10,6 +10,7 @@ import { LoadingScreen } from "@/components/LoadingScreen";
 import { useI18n, type Language } from "@/hooks/use-i18n";
 import { useFontManager } from "@/hooks/useFontManager";
 import { getFileExtension, getFontFormat } from "@/utils/fontHelpers";
+import { IconHeart, IconSparkles } from "@tabler/icons-react";
 
 const DEFAULT_TEXTS = {
   en: "The quick brown fox jumps over the lazy dog",
@@ -146,14 +147,34 @@ export default function FontPreview() {
         </div>
       </main>
 
+
       <footer
-        className={`${
-          activeLanguage === "km" ? "font-inter-khmer" : "font-poppins"
-        } border-t border-slate-700 bg-slate-900/50 backdrop-blur-md mt-12 sm:mt-16`}
+        className={`${activeLanguage === "km" ? "font-inter-khmer" : "font-poppins"
+          } relative border-t border-slate-700/50 bg-gradient-to-b from-slate-900/50 to-slate-950/80 backdrop-blur-xl mt-12 sm:mt-16 overflow-hidden`}
       >
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 text-center text-slate-400 text-sm">
-          <p>{t("footer.text")}</p>
+        <div className="absolute inset-0 bg-gradient-to-r from-cyan-500/5 via-transparent to-blue-500/5 pointer-events-none" />
+        <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+          <div className="flex flex-col items-center justify-center space-y-4">
+            <div className="flex items-center gap-2">
+              <img src="/logo.png" className="w-9 h-w-9" alt="akara Logo" />
+            </div>
+            <p className="text-slate-400 text-sm max-w-md text-center">
+              {t("footer.text")}
+            </p>
+            <div className="w-24 h-px bg-gradient-to-r from-transparent via-slate-600 to-transparent" />
+            <div className="flex flex-col sm:flex-row items-center justify-center gap-4 text-sm text-slate-500">
+              <div className="flex items-center gap-1.5">
+                <span>{t("footer.made-with")}</span>
+                <IconHeart size={14} className="text-red-400 fill-red-400" />
+                <span>{t("footer.for")}</span>
+              </div>
+              <span className="hidden sm:block text-xl text-slate-700">•</span>
+              <span>&copy; {new Date().getFullYear()} {t("footer.alrights")}</span>
+            </div>
+          </div>
         </div>
+        {/* Bottom glow effect */}
+        <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-1/2 h-px bg-gradient-to-r from-transparent via-cyan-500/50 to-transparent" />
       </footer>
     </div>
   );

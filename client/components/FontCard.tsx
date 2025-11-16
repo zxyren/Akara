@@ -1,8 +1,8 @@
 import { motion } from "framer-motion";
-import { useEffect, useRef, useState, forwardRef } from "react";
+import { useEffect, useRef, useState, memo } from "react";
 import type { LoadedFont } from "@/types/font";
 import { useI18n, type Language } from "@/hooks/use-i18n";
-import { IconClipboardCheck, IconClipboard, IconX, IconFileTypography } from "@tabler/icons-react";
+import { IconClipboardCheck, IconClipboard, IconX } from "@tabler/icons-react";
 
 interface FontCardProps {
   font: LoadedFont;
@@ -21,7 +21,8 @@ const sanitizeFontName = (name: string, idx: number) => {
   return `font-${clean}-${idx}`;
 };
 
-export const FontCard = forwardRef<HTMLDivElement, FontCardProps>(({
+// Memoize the component to prevent unnecessary re-renders
+export const FontCard = memo<FontCardProps>(({
   font,
   fontIndex,
   previewText,
@@ -31,58 +32,70 @@ export const FontCard = forwardRef<HTMLDivElement, FontCardProps>(({
   onCopy,
   getFileExtension,
   getFontFormat,
-}, ref) => {
+}) => {
   const { t } = useI18n(activeLanguage);
   const ext = getFileExtension(font.name);
   const styleRef = useRef<HTMLStyleElement | null>(null);
   const [loaded, setLoaded] = useState(false);
-  const [fontFam] = useState(() => sanitizeFontName(font.name, fontIndex));
+  const fontFam = useRef(sanitizeFontName(font.name, fontIndex)).current;
 
   useEffect(() => {
-    if (!styleRef.current) {
-      const style = document.createElement("style");
-      style.textContent = `@font-face{font-family:"${fontFam}";src:url('${font.fontData}')format('${getFontFormat(font.name)}');font-display:swap;}`;
-      document.head.appendChild(style);
-      styleRef.current = style;
+    if (styleRef.current) return;
 
+    const style = document.createElement("style");
+    const format = getFontFormat(font.name);
+    style.textContent = `@font-face{font-family:"${fontFam}";src:url('${font.fontData}')format('${format}');font-display:swap;}`;
+    document.head.appendChild(style);
+    styleRef.current = style;
+
+    // Use requestIdleCallback for non-blocking font loading
+    const loadFont = () => {
       if ('fonts' in document) {
-        new FontFace(fontFam, `url('${font.fontData}')`).load()
-          .then(f => { document.fonts.add(f); setLoaded(true); })
+        new FontFace(fontFam, `url('${font.fontData}')`)
+          .load()
+          .then(f => {
+            document.fonts.add(f);
+            setLoaded(true);
+          })
           .catch(() => setLoaded(true));
       } else {
-        setTimeout(() => setLoaded(true), 500);
-      }
-    }
-    return () => {
-      if (styleRef.current && document.head.contains(styleRef.current)) {
-        document.head.removeChild(styleRef.current);
+        setLoaded(true);
       }
     };
-  }, [font.fontData, font.name, getFontFormat, fontFam]);
+
+    if ('requestIdleCallback' in window) {
+      requestIdleCallback(loadFont);
+    } else {
+      setTimeout(loadFont, 0);
+    }
+
+    return () => {
+      if (styleRef.current?.parentNode) {
+        styleRef.current.parentNode.removeChild(styleRef.current);
+      }
+    };
+  }, []); // Empty deps - only run once
 
   const fontClass = activeLanguage === "km" ? "font-inter-khmer" : "font-poppins";
+  const truncatedText = previewText.length > 60 ? previewText.slice(0, 60) + '...' : previewText;
 
   return (
     <motion.div
-      ref={ref}
+      layout
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
       exit={{ opacity: 0, scale: 0.95 }}
-      transition={{ duration: 0.3 }}
-      className={`${fontClass} group relative overflow-hidden bg-gradient-to-br from-slate-800/90 to-slate-900/90 backdrop-blur-sm border border-slate-700/50 rounded-2xl p-6 hover:border-slate-600/80 hover:shadow-xl hover:shadow-slate-900/20 transition-all`}
+      transition={{ duration: 0.2 }}
+      className={`${fontClass} group relative overflow-hidden bg-gradient-to-br from-slate-800/90 to-slate-900/90 backdrop-blur-sm border border-slate-700/50 rounded-2xl p-6 hover:border-slate-600/80 hover:shadow-xl hover:shadow-slate-900/20 transition-all will-change-transform`}
     >
-      {/* Subtle gradient overlay on hover */}
-      <div className="absolute inset-0 bg-gradient-to-br from-blue-500/0 to-purple-500/0 group-hover:from-blue-500/5 group-hover:to-purple-500/5 transition-all duration-500" />
+      <div className="absolute inset-0 bg-gradient-to-br from-blue-500/0 to-purple-500/0 group-hover:from-blue-500/5 group-hover:to-purple-500/5 transition-all duration-500 pointer-events-none" />
 
       {/* Header */}
       <div className="relative flex items-start justify-between mb-5 pb-4 border-b border-slate-700/50">
         <div className="flex-1 min-w-0">
           <div className="flex items-center gap-2 mb-2">
-            <div className="p-1.5 bg-slate-700/50 rounded-lg">
-              <IconFileTypography size={23} className="text-blue-400" strokeWidth={2} />
-            </div>
             <h3 className="font-medium text-slate-100 truncate">{font.name}</h3>
-            <span className="px-2 py-0.5 bg-gradient-to-r from-cyan-500/20 to-blue-500/20 border border-cyan-500/30 rounded-md text-xs text-cyan-300 font-mono uppercase tracking-wide">{ext}</span>
+            <span className="px-2 py-0.5 bg-cyan-500/20 rounded-md text-sm text-cyan-300 tracking-wide">.{ext}</span>
           </div>
           <p className="text-xs text-slate-400 truncate pl-8">{font.fontFamily}</p>
         </div>
@@ -100,26 +113,21 @@ export const FontCard = forwardRef<HTMLDivElement, FontCardProps>(({
       {/* Preview Section */}
       <div className="relative space-y-4">
         {!loaded && (
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            className="flex items-center gap-2 text-slate-400 text-sm"
-          >
+          <div className="flex items-center gap-2 text-slate-400 text-sm">
             <div className="w-1.5 h-1.5 bg-blue-400 rounded-full animate-pulse" />
             Loading font...
-          </motion.div>
+          </div>
         )}
 
         <div
-          className="relative bg-slate-900 rounded-xl p-5 min-h-[100px] flex items-center border border-slate-700/30"
+          className="relative bg-slate-900 rounded-xl p-5 min-h-[100px] flex items-center border border-slate-700/30 transition-opacity duration-300"
           style={{ opacity: loaded ? 1 : 0.4 }}
         >
           <p
-            style={{ fontFamily: fontFam }}
-            className="text-3xl text-white leading-snug"
+            style={{ fontFamily: loaded ? fontFam : 'inherit' }}
+            className="text-3xl text-white leading-snug break-words"
           >
-            {previewText ? previewText.slice(0, 60) : ''}
-            {previewText && previewText.length > 60 && '...'}
+            {truncatedText}
           </p>
         </div>
 
@@ -153,5 +161,14 @@ export const FontCard = forwardRef<HTMLDivElement, FontCardProps>(({
         </div>
       </div>
     </motion.div>
+  );
+}, (prev, next) => {
+  // Custom comparison for better memoization
+  return (
+    prev.font.name === next.font.name &&
+    prev.fontIndex === next.fontIndex &&
+    prev.previewText === next.previewText &&
+    prev.copied === next.copied &&
+    prev.activeLanguage === next.activeLanguage
   );
 });

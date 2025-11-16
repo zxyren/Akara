@@ -40,11 +40,11 @@ export const FontSearch = ({
           whileHover={{ scale: 1.05 }}
           whileTap={{ scale: 0.95 }}
           onClick={onClearAll}
-          className="flex-1 px-3 py-2 bg-red-600/20 border border-red-600/50 text-red-300 rounded-lg font-medium hover:bg-red-600/30 transition-colors text-sm"
+          className="flex-1 px-3 py-2 bg-red-600/20 border border-red-600/50 text-red-300 rounded-lg hover:bg-red-600/30 transition-colors text-sm"
         >
           {t("search.clearAll")}
         </motion.button>
-        <span className="flex-1 px-3 py-2 bg-slate-700/50 rounded-lg text-xs text-slate-400 flex items-center justify-center">
+        <span className="flex-1 px-3 py-2 bg-slate-700/50 rounded-lg text-sm text-slate-400 flex items-center justify-center">
           {filteredFontsCount} {t("search.found")}
         </span>
       </div>

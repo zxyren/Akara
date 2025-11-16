@@ -24,7 +24,7 @@ export const AppHeader = ({
         <div className="flex items-center justify-between">
           {/* Left side: logo */}
           <div>
-            <img src="/logo.png" className="w-10 h-10" alt="Akson Logo" />
+            <img src="/logo.png" className="w-10 h-10" alt="akara Logo" />
           </div>
 
           {/* Right side: Language toggle - Minimal Underline */}

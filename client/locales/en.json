@@ -18,6 +18,7 @@
   },
   "preview": {
     "title": "Preview Text",
+    "loading": "Loading fonts...",
     "placeholder": "Enter English text to preview..."
   },
   "font": {
@@ -33,6 +34,9 @@
     "next": "Next"
   },
   "footer": {
-    "text": "Font Preview Studio • View and customize fonts in real-time"
+    "text": "Upload, preview, and test your fonts instantly in your browser",
+    "made-with": "Made with",
+    "for": "for designers and developers",
+    "alrights": "All rights reserved"
   }
 }
