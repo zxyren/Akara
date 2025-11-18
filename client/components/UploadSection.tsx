@@ -34,7 +34,7 @@ export const UploadSection = ({
             className="border-2 border-dashed border-slate-600 rounded-2xl p-6 text-center cursor-pointer transition-colors hover:bg-slate-700/30"
           >
             <img
-              src="icons8-file-384.svg"
+              src="icons8-file.svg"
               alt="Upload file"
               className="mx-auto mb-2 w-14 h-w-14 object-contain"
             />
@@ -60,7 +60,7 @@ export const UploadSection = ({
             className="border-2 border-dashed border-slate-600 rounded-2xl p-6 text-center cursor-pointer transition-colors hover:bg-slate-700/30"
           >
             <img
-              src="/icons8-opened-folder-384.svg"
+              src="/icons8-folder.svg"
               alt="Upload folder"
               className="mx-auto mb-2 w-14 h-14 object-contain"
             />
@@ -89,7 +89,7 @@ export const UploadSection = ({
           className="flex items-center justify-between px-4 py-3 bg-slate-900/50 border border-slate-700/30 rounded-xl"
         >
           <div className="flex items-center gap-2">
-            <img src="/icons8-file.svg" alt="Folder" className="w-6 h-w-6 object-contain" />
+            <img src="/icons8-file-384.svg" alt="Folder" className="w-6 h-w-6 object-contain" />
             <span className="text-sm text-slate-300 font-normal">
               {fontsCount} {t("upload.fontsLoaded")}
             </span>

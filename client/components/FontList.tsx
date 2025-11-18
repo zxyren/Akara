@@ -58,7 +58,7 @@ export const FontList = ({
     return (
       <EmptyCard>
         <div className="relative z-10">
-          <img src="/Upload-amico.svg" alt="upload" className="mx-auto w-48 h-48" />
+          <img src="/icons8-opened-folder.svg" alt="upload" className="mx-auto w-48 h-48" />
           <h3 className="text-2xl font-medium text-slate-200 mb-3">{t("font.noFontsUploaded")}</h3>
           <p className="text-slate-400">{t("font.uploadFonts")}</p>
         </div>
