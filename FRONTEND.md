@@ -195,7 +195,7 @@ type Language = "en" | "km";
 
 ### UI & Animation
 - Framer Motion 12.23 - Animations
-- Tabler icon 3.35 - Icons
+- Hugeicons 3.1 - Icons
 - TailwindCSS 3.4 - Styling
 - Sonner 1.7 - Notifications
 

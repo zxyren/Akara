@@ -2,7 +2,9 @@ import { motion } from "framer-motion";
 import { useEffect, useRef, useState, memo } from "react";
 import type { LoadedFont } from "@/types/font";
 import { useI18n, type Language } from "@/hooks/use-i18n";
-import { IconClipboardCheck, IconClipboard, IconX } from "@tabler/icons-react";
+import { HugeiconsIcon } from '@hugeicons/react';
+import { Cancel01Icon, Task02Icon, TaskDone01Icon } from "@hugeicons/core-free-icons";
+import { Button } from "./ui/button";
 
 interface FontCardProps {
   font: LoadedFont;
@@ -82,82 +84,74 @@ export const FontCard = memo<FontCardProps>(({
   return (
     <motion.div
       layout
-      initial={{ opacity: 0, y: 20 }}
+      initial={{ opacity: 0, y: 12 }}
       animate={{ opacity: 1, y: 0 }}
-      exit={{ opacity: 0, scale: 0.95 }}
+      exit={{ opacity: 0 }}
       transition={{ duration: 0.2 }}
-      className={`${fontClass} group relative overflow-hidden bg-gradient-to-br from-slate-800/90 to-slate-900/90 backdrop-blur-sm border border-slate-700/50 rounded-2xl p-6 hover:border-slate-600/80 hover:shadow-xl hover:shadow-slate-900/20 transition-all will-change-transform`}
+      className={`${fontClass} rounded-xl border border-zinc-800/80 bg-zinc-900/50 p-5 transition-colors hover:border-zinc-700/80`}
     >
-      <div className="absolute inset-0 bg-gradient-to-br from-blue-500/0 to-purple-500/0 group-hover:from-blue-500/5 group-hover:to-purple-500/5 transition-all duration-500 pointer-events-none" />
-
-      {/* Header */}
-      <div className="relative flex items-start justify-between mb-5 pb-4 border-b border-slate-700/50">
-        <div className="flex-1 min-w-0">
-          <div className="flex items-center gap-2 mb-2">
-            <h3 className="font-medium text-slate-100 truncate">{font.name}</h3>
-            <span className="px-2 py-0.5 bg-cyan-500/20 rounded-md text-sm text-cyan-300 tracking-wide">.{ext}</span>
+      <div className="flex items-start justify-between gap-3 mb-4 pb-3 border-b border-zinc-800/80">
+        <div className="min-w-0 flex-1">
+          <div className="flex items-center gap-2 flex-wrap">
+            <h3 className="font-medium text-zinc-100 truncate text-sm">{font.name}</h3>
+            <span className="shrink-0 rounded bg-zinc-800 px-1.5 py-0.5 text-xs font-medium text-zinc-400">
+              .{ext}
+            </span>
           </div>
-          <p className="text-xs text-slate-400 truncate pl-8">{font.fontFamily}</p>
+          <p className="mt-0.5 truncate text-xs text-zinc-500">{font.fontFamily}</p>
         </div>
-
-        <motion.button
-          whileHover={{ scale: 1.1, rotate: 90 }}
-          whileTap={{ scale: 0.9 }}
+        <Button
+          variant="blocked"
+          size="icon"
           onClick={() => onRemove(fontIndex)}
-          className="p-2 hover:bg-red-500/10 rounded-lg transition-colors group/btn"
+          className="shrink-0 rounded-lg p-1.5 group"
+          aria-label="Remove font"
         >
-          <IconX size={20} className="text-slate-400 group-hover/btn:text-red-400 transition-colors" />
-        </motion.button>
+          <HugeiconsIcon icon={Cancel01Icon} size={20} className="group-hover:rotate-90 transition-transform ease-in-out duration-300" />
+        </Button>
       </div>
 
-      {/* Preview Section */}
-      <div className="relative space-y-4">
+      <div className="space-y-3">
         {!loaded && (
-          <div className="flex items-center gap-2 text-slate-400 text-sm">
-            <div className="w-1.5 h-1.5 bg-blue-400 rounded-full animate-pulse" />
-            Loading font...
+          <div className="flex items-center gap-2 text-xs text-zinc-500">
+            <div className="h-1.5 w-1.5 rounded-full bg-zinc-500 animate-pulse" />
+            Loading…
           </div>
         )}
 
         <div
-          className="relative bg-slate-900 rounded-xl p-5 min-h-[100px] flex items-center border border-slate-700/30 transition-opacity duration-300"
-          style={{ opacity: loaded ? 1 : 0.4 }}
+          className="rounded-lg border border-zinc-800/60 bg-zinc-950/60 p-4 min-h-[88px] flex items-center transition-opacity duration-200"
+          style={{ opacity: loaded ? 1 : 0.5 }}
         >
           <p
-            style={{ fontFamily: loaded ? fontFam : 'inherit' }}
-            className="text-3xl text-white leading-snug break-words"
+            style={{ fontFamily: loaded ? fontFam : "inherit" }}
+            className="text-2xl text-zinc-100 leading-snug break-words"
           >
             {truncatedText}
           </p>
         </div>
 
-        {/* Actions */}
-        <div className="flex items-center justify-between gap-3">
-          <motion.button
-            whileHover={{ scale: 1.02 }}
-            whileTap={{ scale: 0.98 }}
+        <div className="flex items-center justify-between gap-2">
+          <Button
             onClick={() => onCopy(font.name)}
-            className="flex items-center gap-2 px-4 py-2 bg-slate-700/50 hover:bg-slate-700 rounded-lg transition-all text-sm font-medium"
+            className="inline-flex items-center gap-1.5 font-normal text-sm rounded-lg"
+            variant="secondary"
           >
             {copied === font.name ? (
               <>
-                <IconClipboardCheck size={16} className="text-green-400" />
-                <span className="text-green-400">{t("font.copied")}</span>
+                <HugeiconsIcon icon={TaskDone01Icon} size={20} className="text-emerald-400" />
+                <span className="text-emerald-400">{t("font.copied")}</span>
               </>
             ) : (
               <>
-                <IconClipboard size={16} className="text-slate-300" />
-                <span className="text-slate-300">{t("font.copyName")}</span>
+                <HugeiconsIcon icon={Task02Icon} size={20} />
+                <span>{t("font.copyName")}</span>
               </>
             )}
-          </motion.button>
-
-          <div className="flex items-center gap-2 px-3 py-2 bg-slate-900/50 border border-slate-700/30 rounded-lg">
-            <div className="w-1.5 h-1.5 bg-emerald-400 rounded-full animate-pulse" />
-            <span className="text-xs text-slate-300 font-medium">
-              {(font.file.size / 1024).toFixed(2)} KB
-            </span>
-          </div>
+          </Button>
+          <span className="rounded-md bg-zinc-950/60 px-2 py-1 text-xs text-zinc-500">
+            {(font.file.size / 1024).toFixed(1)} KB
+          </span>
         </div>
       </div>
     </motion.div>

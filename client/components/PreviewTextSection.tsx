@@ -14,14 +14,17 @@ export const PreviewTextSection = ({
   const { t } = useI18n(activeLanguage);
 
   return (
-    <div className={`${activeLanguage === "km" ? "font-inter-khmer" : "font-poppins"
-          } bg-slate-800 border border-slate-700 rounded-xl p-6`}>
-      <h2 className="text-xl font-medium mb-4">{t("preview.title")}</h2>
+    <div
+      className={`rounded-xl border border-zinc-800/80 bg-zinc-900/50 p-5 ${activeLanguage === "km" ? "font-inter-khmer" : "font-poppins"}`}
+    >
+      <h2 className="text-sm font-semibold uppercase tracking-wider text-zinc-400 mb-3">
+        {t("preview.title")}
+      </h2>
       <textarea
         value={previewText}
         onChange={(e) => onTextChange(e.target.value)}
         placeholder={t("preview.placeholder")}
-        className="w-full h-32 bg-slate-700 border border-slate-600 rounded-lg p-3 text-white placeholder-slate-400 focus:border-cyan-400 focus:outline-none resize-none"
+        className="w-full h-28 resize-none rounded-lg border border-zinc-700 bg-zinc-950/60 px-3 py-2.5 text-sm text-zinc-100 placeholder-zinc-500 focus:border-zinc-500 focus:outline-none focus:ring-1 focus:ring-zinc-500"
       />
     </div>
   );

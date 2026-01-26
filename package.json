@@ -21,7 +21,8 @@
     "typecheck": "tsc"
   },
   "dependencies": {
-    "@tabler/icons-react": "^3.35.0",
+    "@hugeicons/core-free-icons": "^3.1.1",
+    "@hugeicons/react": "^1.1.4",
     "dotenv": "^17.2.1",
     "express": "^5.1.0",
     "zod": "^3.25.76"

@@ -10,7 +10,8 @@ import { LoadingScreen } from "@/components/LoadingScreen";
 import { useI18n, type Language } from "@/hooks/use-i18n";
 import { useFontManager } from "@/hooks/useFontManager";
 import { getFileExtension, getFontFormat } from "@/utils/fontHelpers";
-import { IconHeart, IconSparkles } from "@tabler/icons-react";
+import { HugeiconsIcon } from '@hugeicons/react';
+import { FavouriteIcon } from "@hugeicons/core-free-icons";
 
 const DEFAULT_TEXTS = {
   en: "The quick brown fox jumps over the lazy dog",
@@ -83,7 +84,7 @@ export default function FontPreview() {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 text-white font-poppins">
+    <div className="min-h-screen bg-zinc-950 text-zinc-100 font-poppins">
       <AppHeader activeLanguage={activeLanguage} onLanguageChange={handleLanguageChange} />
 
       {showSkippedModal && (
@@ -94,14 +95,14 @@ export default function FontPreview() {
         />
       )}
 
-      <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-12">
+      <main className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-6 sm:py-10">
         {isProcessing && (
           <ProcessingIndicator current={processProgress.current} total={processProgress.total} />
         )}
 
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 lg:gap-8">
           <div className="lg:col-span-1">
-            <div className="sticky top-24 space-y-6">
+            <div className="sticky top-20 space-y-5">
               <UploadSection
                 fontsCount={fonts.length}
                 onFileUpload={handleFileUpload}
@@ -150,31 +151,25 @@ export default function FontPreview() {
 
       <footer
         className={`${activeLanguage === "km" ? "font-inter-khmer" : "font-poppins"
-          } relative border-t border-slate-700/50 bg-gradient-to-b from-slate-900/50 to-slate-950/80 backdrop-blur-xl mt-12 sm:mt-16 overflow-hidden`}
+          } border-t border-zinc-800/80 mt-12 sm:mt-14 bg-zinc-900/40`}
       >
-        <div className="absolute inset-0 bg-gradient-to-r from-cyan-500/5 via-transparent to-blue-500/5 pointer-events-none" />
-        <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-          <div className="flex flex-col items-center justify-center space-y-4">
-            <div className="flex items-center gap-2">
-              <img src="/logo.png" className="w-9 h-w-9" alt="akara Logo" />
-            </div>
-            <p className="text-slate-400 text-sm max-w-md text-center">
+        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
+          <div className="flex flex-col items-center justify-center gap-3 text-center">
+            <img src="/logo.png" className="w-8 h-8 opacity-90" alt="akara Logo" />
+            <p className="text-zinc-500 text-sm max-w-sm">
               {t("footer.text")}
             </p>
-            <div className="w-24 h-px bg-gradient-to-r from-transparent via-slate-600 to-transparent" />
-            <div className="flex flex-col sm:flex-row items-center justify-center gap-4 text-sm text-slate-500">
-              <div className="flex items-center gap-1.5">
+            <div className="flex flex-col sm:flex-row items-center justify-center gap-2 sm:gap-3 text-xs text-zinc-500">
+              <div className="flex items-center gap-1">
                 <span>{t("footer.made-with")}</span>
-                <IconHeart size={14} className="text-red-400 fill-red-400" />
+                <HugeiconsIcon icon={FavouriteIcon} size={12} className="text-rose-400 fill-rose-400" />
                 <span>{t("footer.for")}</span>
               </div>
-              <span className="hidden sm:block text-xl text-slate-700">•</span>
+              <span className="hidden sm:inline">·</span>
               <span>&copy; {new Date().getFullYear()} {t("footer.alrights")}</span>
             </div>
           </div>
         </div>
-        {/* Bottom glow effect */}
-        <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-1/2 h-px bg-gradient-to-r from-transparent via-cyan-500/50 to-transparent" />
       </footer>
     </div>
   );

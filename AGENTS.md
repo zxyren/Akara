@@ -10,7 +10,7 @@ While the starter comes with a express server, only create endpoint when strictl
 - **Frontend**: React 18 + React Router 6 (spa) + TypeScript + Vite + TailwindCSS 3
 - **Backend**: Express server integrated with Vite dev server
 - **Testing**: Vitest
-- **UI**: Radix UI + TailwindCSS 3 + Tabler icons
+- **UI**: Radix UI + TailwindCSS 3 + Hugeicons
 
 ## Project Structure
 

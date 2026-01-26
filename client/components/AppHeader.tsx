@@ -10,59 +10,39 @@ export const AppHeader = ({
   activeLanguage,
   onLanguageChange,
 }: AppHeaderProps) => {
-  const { t } = useI18n(activeLanguage);
+  useI18n(activeLanguage);
 
   return (
     <motion.header
-      initial={{ opacity: 0, y: -20 }}
+      initial={{ opacity: 0, y: -8 }}
       animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.6 }}
-      className={`${activeLanguage === "km" ? "font-inter-khmer" : "font-poppins"} 
-        border-b border-slate-800 bg-slate-900/60 backdrop-blur-md sticky top-0 z-50`}
+      transition={{ duration: 0.3 }}
+      className={`${activeLanguage === "km" ? "font-inter-khmer" : "font-poppins"}
+        border-b border-zinc-800/80 bg-zinc-950/80 backdrop-blur-md sticky top-0 z-50`}
     >
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
-        <div className="flex items-center justify-between">
-          {/* Left side: logo */}
-          <div>
-            <img src="/logo.png" className="w-10 h-10" alt="akara Logo" />
-          </div>
+      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 h-14 flex items-center justify-between">
+        <img src="/logo.png" className="h-8 w-8" alt="akara Logo" />
 
-          {/* Right side: Language toggle - Minimal Underline */}
-          <div className="flex items-center gap-6">
+        <div className="flex rounded-lg bg-zinc-900/80 p-0.5 border border-zinc-800/80">
+          {(["en", "km"] as const).map((lang) => (
             <button
-              onClick={() => onLanguageChange("en")}
-              className="relative pb-2 text-base font-medium transition-colors"
+              key={lang}
+              onClick={() => onLanguageChange(lang)}
+              className={`relative px-3 py-1.5 text-sm font-medium rounded-md transition-colors
+                ${activeLanguage === lang ? "text-zinc-950" : "text-zinc-400 hover:text-zinc-200"}`}
             >
-              <span className={activeLanguage === "en" ? "text-white" : "text-slate-500 hover:text-slate-400"}>
-                EN
-              </span>
-              {activeLanguage === "en" && (
+              {activeLanguage === lang && (
                 <motion.div
-                  layoutId="language-underline"
-                  className="absolute bottom-0 left-0 right-0 h-0.5 bg-gradient-to-r from-blue-500 to-cyan-500"
-                  transition={{ type: "spring", stiffness: 300, damping: 30 }}
+                  layoutId="lang-pill"
+                  className="absolute inset-0 rounded-md bg-zinc-200 -z-10"
+                  transition={{ type: "spring", stiffness: 400, damping: 30 }}
                 />
               )}
+              {lang === "en" ? "EN" : "KM"}
             </button>
-
-            <button
-              onClick={() => onLanguageChange("km")}
-              className="relative pb-2 text-base font-medium transition-colors"
-            >
-              <span className={activeLanguage === "km" ? "text-white" : "text-slate-500 hover:text-slate-400"}>
-                KM
-              </span>
-              {activeLanguage === "km" && (
-                <motion.div
-                  layoutId="language-underline"
-                  className="absolute bottom-0 left-0 right-0 h-0.5 bg-gradient-to-r from-blue-500 to-cyan-500"
-                  transition={{ type: "spring", stiffness: 300, damping: 30 }}
-                />
-              )}
-            </button>
-          </div>
+          ))}
         </div>
       </div>
     </motion.header>
   );
-};
+}

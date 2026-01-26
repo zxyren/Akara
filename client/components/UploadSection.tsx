@@ -1,6 +1,7 @@
 import { motion } from "framer-motion";
 import { useI18n, type Language } from "@/hooks/use-i18n";
-import { IconArrowRight, IconInfoTriangleFilled } from "@tabler/icons-react";
+import { HugeiconsIcon } from '@hugeicons/react';
+import { AlertCircleIcon, ArrowRight02Icon } from "@hugeicons/core-free-icons";
 
 interface UploadSectionProps {
   fontsCount: number;
@@ -21,30 +22,28 @@ export const UploadSection = ({
 }: UploadSectionProps) => {
   const { t } = useI18n(activeLanguage);
 
+  const dropZoneClass =
+    "border border-dashed border-zinc-600 rounded-xl p-5 text-center cursor-pointer transition-colors hover:border-zinc-500 hover:bg-zinc-900/50";
+
   return (
-    <div className={`bg-slate-800 border border-slate-700 rounded-xl p-6 ${activeLanguage === "km" ? "font-inter-khmer" : "font-poppins"}`}>
-      <h2 className="text-xl font-medium mb-4 flex items-center gap-2">
+    <div
+      className={`rounded-xl border border-zinc-800/80 bg-zinc-900/50 p-5 ${activeLanguage === "km" ? "font-inter-khmer" : "font-poppins"}`}
+    >
+      <h2 className="text-sm font-semibold uppercase tracking-wider text-zinc-400 mb-4">
         {t("upload.title")}
       </h2>
 
-      <div className="space-y-4">
+      <div className="space-y-3">
         <label className="block">
-          <motion.div
-            whileHover={{ borderColor: "rgb(34, 211, 238)" }}
-            className="border-2 border-dashed border-slate-600 rounded-2xl p-6 text-center cursor-pointer transition-colors hover:bg-slate-700/30"
-          >
+          <div className={dropZoneClass}>
             <img
               src="icons8-file.svg"
               alt="Upload file"
-              className="mx-auto mb-2 w-14 h-w-14 object-contain"
+              className="mx-auto mb-1.5 w-10 h-10 object-contain opacity-70"
             />
-            <p className="text-base font-medium text-slate-300">
-              {t("upload.selectFiles")}
-            </p>
-            <p className="text-sm text-slate-400 mt-1">
-              {t("upload.supportedFormats")}
-            </p>
-          </motion.div>
+            <p className="text-sm font-medium text-zinc-200">{t("upload.selectFiles")}</p>
+            <p className="text-xs text-zinc-500 mt-0.5">{t("upload.supportedFormats")}</p>
+          </div>
           <input
             type="file"
             multiple
@@ -55,22 +54,15 @@ export const UploadSection = ({
         </label>
 
         <label className="block">
-          <motion.div
-            whileHover={{ borderColor: "rgb(34, 211, 238)" }}
-            className="border-2 border-dashed border-slate-600 rounded-2xl p-6 text-center cursor-pointer transition-colors hover:bg-slate-700/30"
-          >
+          <div className={dropZoneClass}>
             <img
               src="/icons8-folder.svg"
               alt="Upload folder"
-              className="mx-auto mb-2 w-14 h-14 object-contain"
+              className="mx-auto mb-1.5 w-10 h-10 object-contain opacity-70"
             />
-            <p className="text-base font-medium text-slate-300">
-              {t("upload.selectFolder")}
-            </p>
-            <p className="text-sm text-slate-400 mt-1">
-              {t("upload.folderDescription")}
-            </p>
-          </motion.div>
+            <p className="text-sm font-medium text-zinc-200">{t("upload.selectFolder")}</p>
+            <p className="text-xs text-zinc-500 mt-0.5">{t("upload.folderDescription")}</p>
+          </div>
           <input
             type="file"
             multiple
@@ -83,40 +75,37 @@ export const UploadSection = ({
       </div>
 
       <div className="mt-4 space-y-2">
-        <motion.div
-          initial={{ opacity: 0, y: 10 }}
-          animate={{ opacity: 1, y: 0 }}
-          className="flex items-center justify-between px-4 py-3 bg-slate-900/50 border border-slate-700/30 rounded-xl"
-        >
+        <div className="flex items-center justify-between px-3 py-2.5 rounded-lg bg-zinc-950/60 border border-zinc-800/60">
           <div className="flex items-center gap-2">
-            <img src="/icons8-file-384.svg" alt="Folder" className="w-6 h-w-6 object-contain" />
-            <span className="text-sm text-slate-300 font-normal">
+            <img src="/icons8-file-384.svg" alt="" className="w-5 h-5 object-contain opacity-60" />
+            <span className="text-sm text-zinc-300">
               {fontsCount} {t("upload.fontsLoaded")}
             </span>
           </div>
           {fontsCount > 0 && (
-            <div className="w-2 h-2 bg-green-500 rounded-full animate-pulse" />
+            <div className="w-2 h-2 rounded-full bg-emerald-500/80" />
           )}
-        </motion.div>
+        </div>
 
         {skippedFontsCount > 0 && onShowSkipped && (
           <motion.button
-            initial={{ opacity: 0, y: -10 }}
-            animate={{ opacity: 1, y: 0 }}
-            whileHover={{ scale: 1.02 }}
-            whileTap={{ scale: 0.98 }}
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
             onClick={onShowSkipped}
-            className="w-full p-3 bg-red-900/30 border border-red-700/50 hover:bg-red-900/40 rounded-lg transition-colors flex items-center justify-between"
+            className="w-full p-2.5 rounded-lg border border-amber-500/30 bg-amber-500/5 hover:bg-amber-500/10 flex items-center justify-between text-left transition-colors"
           >
             <div className="flex items-center gap-2">
-              <IconInfoTriangleFilled size={20} className="text-yellow-400" />
-              <span className="text-sm text-red-300 font-medium">
+              <HugeiconsIcon icon={AlertCircleIcon} size={18} className="text-amber-400 shrink-0" />
+              <span className="text-sm text-amber-200/90">
                 {skippedFontsCount} {t("font.font")}
                 {activeLanguage === "en" && skippedFontsCount > 1 ? "s " : " "}
                 {t("upload.fontsNotLoaded")}
               </span>
             </div>
-            <span className="text-xs flex space-y-5 text-red-400">{t("upload.view")}<IconArrowRight size={16} /></span>
+            <span className="text-xs text-amber-400/80 flex items-center gap-0.5 shrink-0">
+              {t("upload.view")}
+              <HugeiconsIcon icon={ArrowRight02Icon} size={14} />
+            </span>
           </motion.button>
         )}
       </div>

@@ -1,6 +1,5 @@
-import { motion } from "framer-motion";
-import { useI18n, type Language } from "@/hooks/use-i18n";
 import { useEffect } from "react";
+import { useI18n, type Language } from "@/hooks/use-i18n";
 
 interface FontPaginationProps {
   currentPage: number;
@@ -36,54 +35,43 @@ export const FontPagination = ({
     return pages;
   };
 
-  const PageButton = ({ page, isActive }: { page: number; isActive?: boolean }) => (
-    <motion.button
-      whileHover={{ scale: 1.05 }}
-      whileTap={{ scale: 0.95 }}
-      onClick={() => onPageChange(page)}
-      className={`w-8 h-8 rounded-lg text-xs font-medium transition-colors ${
-        isActive
-          ? "bg-cyan-500 text-slate-900"
-          : "bg-slate-700 text-slate-300 hover:bg-slate-600"
-      }`}
-    >
-      {page}
-    </motion.button>
-  );
-
   return (
-    <div className="flex items-center justify-center gap-2 pt-2 flex-wrap">
-      <motion.button
-        whileHover={{ scale: 1.05 }}
-        whileTap={{ scale: 0.95 }}
+    <div className="flex flex-wrap items-center justify-center gap-1.5 pt-1">
+      <button
         onClick={() => onPageChange(currentPage - 1)}
         disabled={currentPage === 1}
-        className="px-3 py-2 bg-slate-700 hover:bg-slate-600 disabled:opacity-50 disabled:cursor-not-allowed rounded-lg text-sm font-medium transition-colors"
+        className="rounded-lg border border-zinc-700 bg-zinc-800/60 px-2.5 py-1.5 text-xs font-medium text-zinc-300 hover:bg-zinc-700 disabled:cursor-not-allowed disabled:opacity-40"
       >
         {t("font.prev")}
-      </motion.button>
+      </button>
 
-      <div className="flex gap-1 items-center">
+      <div className="flex items-center gap-1">
         {getPageNumbers().map((page, idx) =>
           typeof page === "number" ? (
-            <PageButton key={page} page={page} isActive={currentPage === page} />
+            <button
+              key={page}
+              onClick={() => onPageChange(page)}
+              className={`h-8 w-8 rounded-lg text-xs font-medium transition-colors ${
+                currentPage === page
+                  ? "bg-zinc-200 text-zinc-900"
+                  : "border border-zinc-800 bg-zinc-900/60 text-zinc-400 hover:bg-zinc-800 hover:text-zinc-200"
+              }`}
+            >
+              {page}
+            </button>
           ) : (
-            <span key={`ellipsis-${idx}`} className="text-slate-500 px-1">
-              ...
-            </span>
+            <span key={`ellipsis-${idx}`} className="px-1 text-zinc-500">…</span>
           )
         )}
       </div>
 
-      <motion.button
-        whileHover={{ scale: 1.05 }}
-        whileTap={{ scale: 0.95 }}
+      <button
         onClick={() => onPageChange(currentPage + 1)}
         disabled={currentPage === totalPages}
-        className="px-3 py-2 bg-slate-700 hover:bg-slate-600 disabled:opacity-50 disabled:cursor-not-allowed rounded-lg text-sm font-medium transition-colors"
+        className="rounded-lg border border-zinc-700 bg-zinc-800/60 px-2.5 py-1.5 text-xs font-medium text-zinc-300 hover:bg-zinc-700 disabled:cursor-not-allowed disabled:opacity-40"
       >
         {t("font.next")}
-      </motion.button>
+      </button>
     </div>
   );
 };

@@ -3,7 +3,6 @@ import { FontCard } from "./FontCard";
 import { FontPagination } from "./FontPagination";
 import type { LoadedFont } from "@/types/font";
 import { useI18n, type Language } from "@/hooks/use-i18n";
-import { IconUpload, IconSparkles } from "@tabler/icons-react";
 
 interface FontListProps {
   fonts: LoadedFont[];
@@ -42,25 +41,20 @@ export const FontList = ({
   const paginatedFonts = filteredFonts.slice(startIndex, endIndex);
 
   const EmptyCard = ({ children }: { children: React.ReactNode }) => (
-    <motion.div
-      initial={{ opacity: 0, y: 20 }}
-      animate={{ opacity: 1, y: 0 }}
-      className={`${fontClass} relative overflow-hidden bg-gradient-to-br from-slate-900/50 via-slate-800/30 to-slate-900/50 backdrop-blur-sm border border-slate-700/50 rounded-3xl p-16 text-center min-h-[400px] flex items-center justify-center`}
+    <div
+      className={`${fontClass} flex min-h-[320px] items-center justify-center rounded-xl border border-zinc-800/80 border-dashed bg-zinc-900/30 p-12 text-center`}
     >
-      <div className="absolute inset-0 bg-gradient-to-r from-blue-500/5 via-purple-500/5 to-pink-500/5 animate-pulse" />
-      <div className="absolute top-10 right-10 w-32 h-32 bg-blue-500/10 rounded-full blur-3xl" />
-      <div className="absolute bottom-10 left-10 w-40 h-40 bg-purple-500/10 rounded-full blur-3xl" />
       {children}
-    </motion.div>
+    </div>
   );
 
   if (fonts.length === 0) {
     return (
       <EmptyCard>
-        <div className="relative z-10">
-          <img src="/icons8-opened-folder.svg" alt="upload" className="mx-auto w-48 h-48" />
-          <h3 className="text-2xl font-medium text-slate-200 mb-3">{t("font.noFontsUploaded")}</h3>
-          <p className="text-slate-400">{t("font.uploadFonts")}</p>
+        <div>
+          <img src="/icons8-opened-folder.svg" alt="" className="mx-auto h-24 w-24 opacity-50" />
+          <h3 className="mt-4 text-lg font-medium text-zinc-200">{t("font.noFontsUploaded")}</h3>
+          <p className="mt-1 text-sm text-zinc-500">{t("font.uploadFonts")}</p>
         </div>
       </EmptyCard>
     );
@@ -69,9 +63,9 @@ export const FontList = ({
   if (filteredFonts.length === 0) {
     return (
       <EmptyCard>
-        <div className="relative z-10">
-          <img src="/Questions-bro.svg" alt="Search" className="mx-auto w-48 h-w-48" />
-          <p className="text-slate-300 text-lg font-medium">{t("font.noFontsMatch")}</p>
+        <div>
+          <img src="/Questions-bro.svg" alt="" className="mx-auto h-24 w-24 opacity-50" />
+          <p className="mt-4 text-sm font-medium text-zinc-400">{t("font.noFontsMatch")}</p>
         </div>
       </EmptyCard>
     );
@@ -96,14 +90,18 @@ export const FontList = ({
         ))}
       </AnimatePresence>
 
-      <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="space-y-6 pt-4">
+      <div className="space-y-4 pt-2">
         <div className="flex justify-center">
-          <motion.div initial={{ scale: 0.9, opacity: 0 }} animate={{ scale: 1, opacity: 1 }} className="inline-flex items-center gap-3 px-6 py-3 bg-gradient-to-r from-slate-800/80 to-slate-700/80 backdrop-blur-sm border border-slate-600/50 rounded-full shadow-lg">
-            <IconSparkles className="w-4 h-4 text-blue-400" strokeWidth={2} />
-            <span className="text-sm text-slate-300">
-              {t("font.showing")} <strong className="text-white">{startIndex + 1}-{Math.min(endIndex, filteredFonts.length)}</strong> {t("font.of")} <strong className="text-white">{filteredFonts.length}</strong> {t("font.font")}{activeLanguage === "en" && filteredFonts.length !== 1 && "s"}
-            </span>
-          </motion.div>
+          <span className="rounded-full border border-zinc-800 bg-zinc-900/60 px-4 py-2 text-xs text-zinc-400">
+            {t("font.showing")}{" "}
+            <span className="font-medium text-zinc-200">
+              {startIndex + 1}–{Math.min(endIndex, filteredFonts.length)}
+            </span>{" "}
+            {t("font.of")}{" "}
+            <span className="font-medium text-zinc-200">{filteredFonts.length}</span>{" "}
+            {t("font.font")}
+            {activeLanguage === "en" && filteredFonts.length !== 1 && "s"}
+          </span>
         </div>
 
         {totalPages > 1 && (
@@ -114,7 +112,7 @@ export const FontList = ({
             activeLanguage={activeLanguage}
           />
         )}
-      </motion.div>
+      </div>
     </div>
   );
 };

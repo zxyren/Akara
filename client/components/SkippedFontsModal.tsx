@@ -1,6 +1,8 @@
-import { IconInfoTriangleFilled } from "@tabler/icons-react";
+import { HugeiconsIcon } from '@hugeicons/react';
+import { AlertCircleIcon } from "@hugeicons/core-free-icons";
 import type { Language } from "@/hooks/use-i18n";
 import { useI18n } from "@/hooks/use-i18n";
+import { Button } from './ui/button';
 
 interface SkippedFontsModalProps {
   skippedFonts: Array<{ name: string; reason: string }>;
@@ -19,33 +21,39 @@ export const SkippedFontsModal = ({
     <div
       className={`${
         activeLanguage === "km" ? "font-inter-khmer" : "font-poppins"
-      } fixed inset-0 bg-black/70 flex items-center justify-center z-50 p-4`}
+      } fixed inset-0 z-50 flex items-center justify-center bg-zinc-950/80 p-4 backdrop-blur-sm`}
+      role="dialog"
+      aria-modal="true"
     >
-      <div className="bg-slate-800 border border-slate-700 rounded-xl max-w-2xl w-full max-h-[80vh] overflow-hidden flex flex-col">
-        <div className="p-6 border-b border-slate-700">
-          <h3 className="text-xl font-medium text-red-400">
-            <IconInfoTriangleFilled size={24} className="text-yellow-500 inline-block mr-2" />
+      <div className="flex max-h-[80vh] w-full max-w-lg flex-col overflow-hidden rounded-xl border border-zinc-800 bg-zinc-900 shadow-xl">
+        <div className="border-b border-zinc-800 px-5 py-4">
+          <h3 className="flex items-center gap-2 text-base font-semibold text-amber-200">
+            <HugeiconsIcon icon={AlertCircleIcon} size={20} className="shrink-0 text-amber-400" />
             {skippedFonts.length} {t("upload.skippedFonts")}
           </h3>
-          <p className="text-sm text-slate-400 mt-2">{t("upload.fontsNotLoaded")}</p>
+          <p className="mt-1 text-sm text-zinc-500">{t("upload.fontsNotLoaded")}</p>
         </div>
-        <div className="flex-1 overflow-y-auto p-6">
-          <div className="space-y-2">
+        <div className="flex-1 overflow-y-auto p-4">
+          <ul className="space-y-2">
             {skippedFonts.map((font, idx) => (
-              <div key={idx} className="bg-slate-700/50 rounded p-3 text-sm">
-                <div className="font-medium text-slate-200 break-all">{font.name}</div>
-                <div className="text-sm text-slate-400 mt-1">Reason: {font.reason}</div>
-              </div>
+              <li
+                key={idx}
+                className="rounded-lg border border-zinc-800/80 bg-zinc-950/60 px-3 py-2 text-sm"
+              >
+                <div className="font-medium text-zinc-200 break-all">{font.name}</div>
+                <div className="mt-0.5 text-xs text-zinc-500">{font.reason}</div>
+              </li>
             ))}
-          </div>
+          </ul>
         </div>
-        <div className="p-6 border-t border-slate-700 flex gap-3">
-          <button
+        <div className="border-t border-zinc-800 p-4">
+          <Button
+          variant='blocked'
             onClick={onClose}
-            className="flex-1 px-4 py-2 bg-cyan-600 hover:bg-cyan-700 rounded-lg transition-colors text-sm font-medium"
+            className="w-full rounded-lg"
           >
             Close
-          </button>
+          </Button>
         </div>
       </div>
     </div>

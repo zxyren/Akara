@@ -1,6 +1,7 @@
-import { motion } from "framer-motion";
 import { useI18n, type Language } from "@/hooks/use-i18n";
-import { IconSearch } from "@tabler/icons-react";
+import { HugeiconsIcon } from '@hugeicons/react';
+import { Search01Icon } from "@hugeicons/core-free-icons";
+import { Button } from "./ui/button";
 
 interface FontSearchProps {
   searchQuery: string;
@@ -22,10 +23,11 @@ export const FontSearch = ({
   const { t } = useI18n(activeLanguage);
 
   return (
-    <div className={`${activeLanguage === "km" ? "font-inter-khmer" : "font-poppins"
-          } bg-slate-800 border border-slate-700 rounded-xl p-6`}>
-      <h2 className="text-xl font-medium mb-4 flex items-center gap-2">
-        <IconSearch className="w-5 h-5 text-cyan-400" />
+    <div
+      className={`rounded-xl border border-zinc-800/80 bg-zinc-900/50 p-5 ${activeLanguage === "km" ? "font-inter-khmer" : "font-poppins"}`}
+    >
+      <h2 className="text-sm font-semibold uppercase tracking-wider text-zinc-400 mb-3 flex items-center gap-2">
+        <HugeiconsIcon icon={Search01Icon} size={20} />
         {t("search.title")}
       </h2>
       <input
@@ -33,18 +35,17 @@ export const FontSearch = ({
         placeholder={t("search.placeholder")}
         value={searchQuery}
         onChange={(e) => onSearchChange(e.target.value)}
-        className="w-full bg-slate-700 border border-slate-600 rounded-lg px-4 py-2 text-white placeholder-slate-400 focus:border-cyan-400 focus:outline-none mb-3"
+        className="w-full rounded-lg border border-zinc-700 bg-zinc-950/60 px-3 py-2 text-sm text-zinc-100 placeholder-zinc-500 focus:border-zinc-500 focus:outline-none focus:ring-1 focus:ring-zinc-500"
       />
-      <div className="flex gap-2">
-        <motion.button
-          whileHover={{ scale: 1.05 }}
-          whileTap={{ scale: 0.95 }}
+      <div className="mt-3 flex gap-2">
+        <Button
+          variant="blocked"
           onClick={onClearAll}
-          className="flex-1 px-3 py-2 bg-red-600/20 border border-red-600/50 text-red-300 rounded-lg hover:bg-red-600/30 transition-colors text-sm"
+          className="flex-1 rounded-lg"
         >
           {t("search.clearAll")}
-        </motion.button>
-        <span className="flex-1 px-3 py-2 bg-slate-700/50 rounded-lg text-sm text-slate-400 flex items-center justify-center">
+        </Button>
+        <span className="flex flex-1 items-center justify-center rounded-lg bg-zinc-950/60 px-3 py-2 text-sm text-zinc-500">
           {filteredFontsCount} {t("search.found")}
         </span>
       </div>
