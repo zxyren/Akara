@@ -1,4 +1,8 @@
 {
+  "app": {
+    "title": "Font Preview",
+    "subtitle": "Upload fonts and instantly preview them with your own text"
+  },
   "upload": {
     "title": "Upload Fonts",
     "view": "View",

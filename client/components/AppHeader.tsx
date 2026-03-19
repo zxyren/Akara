@@ -10,7 +10,7 @@ export const AppHeader = ({
   activeLanguage,
   onLanguageChange,
 }: AppHeaderProps) => {
-  useI18n(activeLanguage);
+  const { t } = useI18n(activeLanguage);
 
   return (
     <motion.header
@@ -18,23 +18,35 @@ export const AppHeader = ({
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.3 }}
       className={`${activeLanguage === "km" ? "font-inter-khmer" : "font-poppins"}
-        border-b border-zinc-800/80 bg-zinc-950/80 backdrop-blur-md sticky top-0 z-50`}
+        border-b border-white/10 bg-[#070A12]/70 backdrop-blur-xl sticky top-0 z-50`}
     >
-      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 h-14 flex items-center justify-between">
-        <img src="/logo.png" className="h-8 w-8" alt="akara Logo" />
+      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
+        <div className="flex items-center gap-3 min-w-0">
+          <div className="h-10 w-10 rounded-xl border border-white/10 bg-white/[0.03] grid place-items-center overflow-hidden">
+            <img src="/logo.png" className="h-7 w-7" alt="Logo" />
+          </div>
+          <div className="min-w-0">
+            <div className="text-sm font-semibold tracking-tight text-white/90 truncate">
+              {t("app.title")}
+            </div>
+            <div className="text-xs text-white/55 truncate">
+              {t("app.subtitle")}
+            </div>
+          </div>
+        </div>
 
-        <div className="flex rounded-lg bg-zinc-900/80 p-0.5 border border-zinc-800/80">
+        <div className="flex rounded-lg bg-white/[0.03] p-0.5 border border-white/10">
           {(["en", "km"] as const).map((lang) => (
             <button
               key={lang}
               onClick={() => onLanguageChange(lang)}
               className={`relative px-3 py-1.5 text-sm font-medium rounded-md transition-colors
-                ${activeLanguage === lang ? "text-zinc-950" : "text-zinc-400 hover:text-zinc-200"}`}
+                ${activeLanguage === lang ? "text-[#070A12]" : "text-white/55 hover:text-white/80"}`}
             >
               {activeLanguage === lang && (
                 <motion.div
                   layoutId="lang-pill"
-                  className="absolute inset-0 rounded-md bg-zinc-200 -z-10"
+                  className="absolute inset-0 rounded-md bg-white/90 -z-10"
                   transition={{ type: "spring", stiffness: 400, damping: 30 }}
                 />
               )}

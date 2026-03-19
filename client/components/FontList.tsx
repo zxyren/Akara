@@ -42,7 +42,7 @@ export const FontList = ({
 
   const EmptyCard = ({ children }: { children: React.ReactNode }) => (
     <div
-      className={`${fontClass} flex min-h-[320px] items-center justify-center rounded-xl border border-zinc-800/80 border-dashed bg-zinc-900/30 p-12 text-center`}
+      className={`${fontClass} flex min-h-[360px] items-center justify-center rounded-2xl border border-white/10 bg-white/[0.02] p-10 text-center`}
     >
       {children}
     </div>
@@ -52,9 +52,11 @@ export const FontList = ({
     return (
       <EmptyCard>
         <div>
-          <img src="/icons8-opened-folder.svg" alt="" className="mx-auto h-24 w-24 opacity-50" />
-          <h3 className="mt-4 text-lg font-medium text-zinc-200">{t("font.noFontsUploaded")}</h3>
-          <p className="mt-1 text-sm text-zinc-500">{t("font.uploadFonts")}</p>
+          <div className="mx-auto grid place-items-center h-14 w-14 rounded-2xl border border-white/10 bg-white/[0.03]">
+            <img src="/icons8-opened-folder.svg" alt="" className="h-8 w-8 opacity-70" />
+          </div>
+          <h3 className="mt-4 text-lg font-semibold text-white/90">{t("font.noFontsUploaded")}</h3>
+          <p className="mt-1 text-sm text-white/55 max-w-sm">{t("font.uploadFonts")}</p>
         </div>
       </EmptyCard>
     );
@@ -64,8 +66,10 @@ export const FontList = ({
     return (
       <EmptyCard>
         <div>
-          <img src="/Questions-bro.svg" alt="" className="mx-auto h-24 w-24 opacity-50" />
-          <p className="mt-4 text-sm font-medium text-zinc-400">{t("font.noFontsMatch")}</p>
+          <div className="mx-auto grid place-items-center h-14 w-14 rounded-2xl border border-white/10 bg-white/[0.03]">
+            <img src="/Questions-bro.svg" alt="" className="h-8 w-8 opacity-70" />
+          </div>
+          <p className="mt-4 text-sm font-medium text-white/75">{t("font.noFontsMatch")}</p>
         </div>
       </EmptyCard>
     );
@@ -92,13 +96,13 @@ export const FontList = ({
 
       <div className="space-y-4 pt-2">
         <div className="flex justify-center">
-          <span className="rounded-full border border-zinc-800 bg-zinc-900/60 px-4 py-2 text-xs text-zinc-400">
+          <span className="rounded-full border border-white/10 bg-white/[0.02] px-4 py-2 text-xs text-white/55">
             {t("font.showing")}{" "}
-            <span className="font-medium text-zinc-200">
+            <span className="font-medium text-white/85">
               {startIndex + 1}–{Math.min(endIndex, filteredFonts.length)}
             </span>{" "}
             {t("font.of")}{" "}
-            <span className="font-medium text-zinc-200">{filteredFonts.length}</span>{" "}
+            <span className="font-medium text-white/85">{filteredFonts.length}</span>{" "}
             {t("font.font")}
             {activeLanguage === "en" && filteredFonts.length !== 1 && "s"}
           </span>

@@ -40,7 +40,7 @@ export const FontPagination = ({
       <button
         onClick={() => onPageChange(currentPage - 1)}
         disabled={currentPage === 1}
-        className="rounded-lg border border-zinc-700 bg-zinc-800/60 px-2.5 py-1.5 text-xs font-medium text-zinc-300 hover:bg-zinc-700 disabled:cursor-not-allowed disabled:opacity-40"
+        className="rounded-lg border border-white/10 bg-white/[0.03] px-2.5 py-1.5 text-xs font-medium text-white/70 hover:bg-white/[0.06] disabled:cursor-not-allowed disabled:opacity-40"
       >
         {t("font.prev")}
       </button>
@@ -53,14 +53,14 @@ export const FontPagination = ({
               onClick={() => onPageChange(page)}
               className={`h-8 w-8 rounded-lg text-xs font-medium transition-colors ${
                 currentPage === page
-                  ? "bg-zinc-200 text-zinc-900"
-                  : "border border-zinc-800 bg-zinc-900/60 text-zinc-400 hover:bg-zinc-800 hover:text-zinc-200"
+                  ? "bg-white/90 text-[#070A12]"
+                  : "border border-white/10 bg-white/[0.03] text-white/55 hover:bg-white/[0.06] hover:text-white/80"
               }`}
             >
               {page}
             </button>
           ) : (
-            <span key={`ellipsis-${idx}`} className="px-1 text-zinc-500">…</span>
+            <span key={`ellipsis-${idx}`} className="px-1 text-white/40">…</span>
           )
         )}
       </div>
@@ -68,7 +68,7 @@ export const FontPagination = ({
       <button
         onClick={() => onPageChange(currentPage + 1)}
         disabled={currentPage === totalPages}
-        className="rounded-lg border border-zinc-700 bg-zinc-800/60 px-2.5 py-1.5 text-xs font-medium text-zinc-300 hover:bg-zinc-700 disabled:cursor-not-allowed disabled:opacity-40"
+        className="rounded-lg border border-white/10 bg-white/[0.03] px-2.5 py-1.5 text-xs font-medium text-white/70 hover:bg-white/[0.06] disabled:cursor-not-allowed disabled:opacity-40"
       >
         {t("font.next")}
       </button>

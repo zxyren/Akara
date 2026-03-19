@@ -88,17 +88,17 @@ export const FontCard = memo<FontCardProps>(({
       animate={{ opacity: 1, y: 0 }}
       exit={{ opacity: 0 }}
       transition={{ duration: 0.2 }}
-      className={`${fontClass} rounded-xl border border-zinc-800/80 bg-zinc-900/50 p-5 transition-colors hover:border-zinc-700/80`}
+      className={`${fontClass} rounded-2xl border border-white/10 bg-white/[0.03] p-5 transition-colors hover:border-white/15`}
     >
-      <div className="flex items-start justify-between gap-3 mb-4 pb-3 border-b border-zinc-800/80">
+      <div className="flex items-start justify-between gap-3 mb-4 pb-3 border-b border-white/10">
         <div className="min-w-0 flex-1">
           <div className="flex items-center gap-2 flex-wrap">
-            <h3 className="font-medium text-zinc-100 truncate text-sm">{font.name}</h3>
-            <span className="shrink-0 rounded bg-zinc-800 px-1.5 py-0.5 text-xs font-medium text-zinc-400">
+            <h3 className="font-medium text-white/90 truncate text-sm">{font.name}</h3>
+            <span className="shrink-0 rounded bg-white/[0.05] px-1.5 py-0.5 text-xs font-medium text-white/55 border border-white/10">
               .{ext}
             </span>
           </div>
-          <p className="mt-0.5 truncate text-xs text-zinc-500">{font.fontFamily}</p>
+          <p className="mt-0.5 truncate text-xs text-white/50">{font.fontFamily}</p>
         </div>
         <Button
           variant="blocked"
@@ -113,19 +113,19 @@ export const FontCard = memo<FontCardProps>(({
 
       <div className="space-y-3">
         {!loaded && (
-          <div className="flex items-center gap-2 text-xs text-zinc-500">
-            <div className="h-1.5 w-1.5 rounded-full bg-zinc-500 animate-pulse" />
+          <div className="flex items-center gap-2 text-xs text-white/55">
+            <div className="h-1.5 w-1.5 rounded-full bg-white/40 animate-pulse" />
             Loading…
           </div>
         )}
 
         <div
-          className="rounded-lg border border-zinc-800/60 bg-zinc-950/60 p-4 min-h-[88px] flex items-center transition-opacity duration-200"
+          className="rounded-xl border border-white/10 bg-white/[0.02] p-4 min-h-[88px] flex items-center transition-opacity duration-200"
           style={{ opacity: loaded ? 1 : 0.5 }}
         >
           <p
             style={{ fontFamily: loaded ? fontFam : "inherit" }}
-            className="text-2xl text-zinc-100 leading-snug break-words"
+            className="text-2xl text-white/90 leading-snug break-words"
           >
             {truncatedText}
           </p>
@@ -149,7 +149,7 @@ export const FontCard = memo<FontCardProps>(({
               </>
             )}
           </Button>
-          <span className="rounded-md bg-zinc-950/60 px-2 py-1 text-xs text-zinc-500">
+          <span className="rounded-md bg-white/[0.02] border border-white/10 px-2 py-1 text-xs text-white/55">
             {(font.file.size / 1024).toFixed(1)} KB
           </span>
         </div>

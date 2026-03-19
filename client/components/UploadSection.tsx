@@ -23,13 +23,13 @@ export const UploadSection = ({
   const { t } = useI18n(activeLanguage);
 
   const dropZoneClass =
-    "border border-dashed border-zinc-600 rounded-xl p-5 text-center cursor-pointer transition-colors hover:border-zinc-500 hover:bg-zinc-900/50";
+    "rounded-xl border border-white/10 bg-white/[0.03] p-4 text-center cursor-pointer transition-colors hover:border-white/15 hover:bg-white/[0.05]";
 
   return (
     <div
-      className={`rounded-xl border border-zinc-800/80 bg-zinc-900/50 p-5 ${activeLanguage === "km" ? "font-inter-khmer" : "font-poppins"}`}
+      className={`rounded-2xl border border-white/10 bg-white/[0.03] p-5 ${activeLanguage === "km" ? "font-inter-khmer" : "font-poppins"}`}
     >
-      <h2 className="text-sm font-semibold uppercase tracking-wider text-zinc-400 mb-4">
+      <h2 className="text-sm font-semibold tracking-tight text-white/85 mb-4">
         {t("upload.title")}
       </h2>
 
@@ -39,10 +39,10 @@ export const UploadSection = ({
             <img
               src="icons8-file.svg"
               alt="Upload file"
-              className="mx-auto mb-1.5 w-10 h-10 object-contain opacity-70"
+              className="mx-auto mb-2 w-9 h-9 object-contain opacity-70"
             />
-            <p className="text-sm font-medium text-zinc-200">{t("upload.selectFiles")}</p>
-            <p className="text-xs text-zinc-500 mt-0.5">{t("upload.supportedFormats")}</p>
+            <p className="text-sm font-medium text-white/85">{t("upload.selectFiles")}</p>
+            <p className="text-xs text-white/55 mt-0.5">{t("upload.supportedFormats")}</p>
           </div>
           <input
             type="file"
@@ -58,10 +58,10 @@ export const UploadSection = ({
             <img
               src="/icons8-folder.svg"
               alt="Upload folder"
-              className="mx-auto mb-1.5 w-10 h-10 object-contain opacity-70"
+              className="mx-auto mb-2 w-9 h-9 object-contain opacity-70"
             />
-            <p className="text-sm font-medium text-zinc-200">{t("upload.selectFolder")}</p>
-            <p className="text-xs text-zinc-500 mt-0.5">{t("upload.folderDescription")}</p>
+            <p className="text-sm font-medium text-white/85">{t("upload.selectFolder")}</p>
+            <p className="text-xs text-white/55 mt-0.5">{t("upload.folderDescription")}</p>
           </div>
           <input
             type="file"
@@ -75,10 +75,10 @@ export const UploadSection = ({
       </div>
 
       <div className="mt-4 space-y-2">
-        <div className="flex items-center justify-between px-3 py-2.5 rounded-lg bg-zinc-950/60 border border-zinc-800/60">
+        <div className="flex items-center justify-between px-3 py-2.5 rounded-xl bg-white/[0.02] border border-white/10">
           <div className="flex items-center gap-2">
             <img src="/icons8-file-384.svg" alt="" className="w-5 h-5 object-contain opacity-60" />
-            <span className="text-sm text-zinc-300">
+            <span className="text-sm text-white/70">
               {fontsCount} {t("upload.fontsLoaded")}
             </span>
           </div>
@@ -92,7 +92,7 @@ export const UploadSection = ({
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             onClick={onShowSkipped}
-            className="w-full p-2.5 rounded-lg border border-amber-500/30 bg-amber-500/5 hover:bg-amber-500/10 flex items-center justify-between text-left transition-colors"
+            className="w-full p-3 rounded-xl border border-amber-500/25 bg-amber-500/5 hover:bg-amber-500/10 flex items-center justify-between text-left transition-colors"
           >
             <div className="flex items-center gap-2">
               <HugeiconsIcon icon={AlertCircleIcon} size={18} className="text-amber-400 shrink-0" />
