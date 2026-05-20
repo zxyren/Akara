@@ -1,6 +1,6 @@
 import { motion } from "framer-motion";
 import { useI18n, type Language } from "@/hooks/use-i18n";
-import { HugeiconsIcon } from '@hugeicons/react';
+import { HugeiconsIcon } from "@hugeicons/react";
 import { AlertCircleIcon, ArrowRight02Icon } from "@hugeicons/core-free-icons";
 
 interface UploadSectionProps {
@@ -41,8 +41,12 @@ export const UploadSection = ({
               alt="Upload file"
               className="mx-auto mb-2 w-9 h-9 object-contain opacity-70"
             />
-            <p className="text-sm font-medium text-white/85">{t("upload.selectFiles")}</p>
-            <p className="text-xs text-white/55 mt-0.5">{t("upload.supportedFormats")}</p>
+            <p className="text-sm font-medium text-white/85">
+              {t("upload.selectFiles")}
+            </p>
+            <p className="text-xs text-white/55 mt-0.5">
+              {t("upload.supportedFormats")}
+            </p>
           </div>
           <input
             type="file"
@@ -60,8 +64,12 @@ export const UploadSection = ({
               alt="Upload folder"
               className="mx-auto mb-2 w-9 h-9 object-contain opacity-70"
             />
-            <p className="text-sm font-medium text-white/85">{t("upload.selectFolder")}</p>
-            <p className="text-xs text-white/55 mt-0.5">{t("upload.folderDescription")}</p>
+            <p className="text-sm font-medium text-white/85">
+              {t("upload.selectFolder")}
+            </p>
+            <p className="text-xs text-white/55 mt-0.5">
+              {t("upload.folderDescription")}
+            </p>
           </div>
           <input
             type="file"
@@ -77,7 +85,11 @@ export const UploadSection = ({
       <div className="mt-4 space-y-2">
         <div className="flex items-center justify-between px-3 py-2.5 rounded-xl bg-white/[0.02] border border-white/10">
           <div className="flex items-center gap-2">
-            <img src="/icons8-file-384.svg" alt="" className="w-5 h-5 object-contain opacity-60" />
+            <img
+              src="/icons8-file-384.svg"
+              alt=""
+              className="w-5 h-5 object-contain opacity-60"
+            />
             <span className="text-sm text-white/70">
               {fontsCount} {t("upload.fontsLoaded")}
             </span>
@@ -95,7 +107,11 @@ export const UploadSection = ({
             className="w-full p-3 rounded-xl border border-amber-500/25 bg-amber-500/5 hover:bg-amber-500/10 flex items-center justify-between text-left transition-colors"
           >
             <div className="flex items-center gap-2">
-              <HugeiconsIcon icon={AlertCircleIcon} size={18} className="text-amber-400 shrink-0" />
+              <HugeiconsIcon
+                icon={AlertCircleIcon}
+                size={18}
+                className="text-amber-400 shrink-0"
+              />
               <span className="text-sm text-amber-200/90">
                 {skippedFontsCount} {t("font.font")}
                 {activeLanguage === "en" && skippedFontsCount > 1 ? "s " : " "}
