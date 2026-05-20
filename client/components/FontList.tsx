@@ -61,7 +61,7 @@ export const FontList = ({
             />
           </div>
           <h3 className="mt-4 text-lg font-semibold text-white/90">
-            {t("font.noFontsUploaded")}ssss
+            {t("font.noFontsUploaded")}
           </h3>
           <p className="mt-1 text-sm text-white/55 max-w-sm">
             {t("font.uploadFonts")}
@@ -77,7 +77,7 @@ export const FontList = ({
         <div>
           <div className="mx-auto grid place-items-center h-14 w-14 rounded-2xl border border-white/10 bg-white/[0.03]">
             <img
-              src="/Questions-bro.svg"
+              src="/icons8-opened-folder.svg"
               alt=""
               className="h-8 w-8 opacity-70"
             />

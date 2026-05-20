@@ -6,8 +6,8 @@ export default {
   prefix: "",
   theme: {
     fontFamily: {
-      poppins: ['Poppins', 'sans-serif'],
-      'inter-khmer': ['Inter Khmer', 'sans-serif'],
+      poppins: ["Poppins", "sans-serif"],
+      googlesans: ["Google Sans", "sans-serif"],
     },
     container: {
       center: true,
@@ -91,5 +91,4 @@ export default {
       },
     },
   },
-  plugins: [require("tailwindcss-animate")],
 } satisfies Config;
