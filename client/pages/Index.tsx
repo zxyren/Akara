@@ -84,7 +84,7 @@ export default function FontPreview() {
   }
 
   return (
-    <div className="min-h-screen font-poppins text-white/90 bg-[#070A12]">
+    <div className="min-h-screen text-white/90 bg-[#070A12]">
       <div className="pointer-events-none fixed inset-0 -z-10">
         <div className="absolute inset-0 bg-[radial-gradient(1000px_500px_at_50%_-140px,rgba(255,255,255,0.10),transparent_60%)]" />
         <div className="absolute inset-0 bg-[radial-gradient(800px_500px_at_15%_0%,rgba(99,102,241,0.18),transparent_55%)]" />
@@ -146,13 +146,7 @@ export default function FontPreview() {
 
             <section className="p-4 sm:p-6">
               <div className="mb-5 flex flex-col gap-1 sm:flex-row sm:items-end sm:justify-between">
-                <div
-                  className={
-                    activeLanguage === "km"
-                      ? "font-inter-khmer"
-                      : "font-poppins"
-                  }
-                >
+                <div>
                   <h1 className="text-lg sm:text-xl font-semibold tracking-tight text-white/90">
                     {t("app.title")}
                   </h1>
@@ -186,11 +180,7 @@ export default function FontPreview() {
         </div>
       </main>
 
-      <footer
-        className={`${
-          activeLanguage === "km" ? "font-inter-khmer" : "font-poppins"
-        } border-t border-white/10 mt-12 sm:mt-14 bg-white/[0.02]`}
-      >
+      <footer className="border-t border-white/10 mt-12 sm:mt-14 bg-white/[0.02]">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
           <div className="flex flex-col items-center justify-center gap-3 text-center">
             <img

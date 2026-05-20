@@ -88,8 +88,6 @@ export const FontCard = memo<FontCardProps>(
       };
     }, []); // Empty deps - only run once
 
-    const fontClass =
-      activeLanguage === "km" ? "font-inter-khmer" : "font-poppins";
     const truncatedText =
       previewText.length > 60 ? previewText.slice(0, 60) + "..." : previewText;
 
@@ -109,7 +107,7 @@ export const FontCard = memo<FontCardProps>(
         animate={{ opacity: 1, y: 0 }}
         exit={{ opacity: 0 }}
         transition={{ duration: 0.2 }}
-        className={`${fontClass} rounded-2xl border border-white/10 bg-white/[0.03] p-5 transition-colors hover:border-white/15`}
+        className="rounded-2xl border border-white/10 bg-white/[0.03] p-5 transition-colors hover:border-white/15"
       >
         <div className="flex items-start justify-between gap-3 mb-4 pb-3 border-b border-white/10">
           <div className="min-w-0 flex-1">

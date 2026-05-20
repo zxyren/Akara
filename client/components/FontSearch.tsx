@@ -23,9 +23,7 @@ export const FontSearch = ({
   const { t } = useI18n(activeLanguage);
 
   return (
-    <div
-      className={`rounded-2xl border border-white/10 bg-white/[0.03] p-5 ${activeLanguage === "km" ? "font-inter-khmer" : "font-poppins"}`}
-    >
+    <div className="rounded-2xl border border-white/10 bg-white/[0.03] p-5">
       <div className="relative">
         <HugeiconsIcon
           icon={Search01Icon}

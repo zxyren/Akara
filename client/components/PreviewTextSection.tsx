@@ -14,9 +14,7 @@ export const PreviewTextSection = ({
   const { t } = useI18n(activeLanguage);
 
   return (
-    <div
-      className={`rounded-2xl border border-white/10 bg-white/[0.03] p-5 ${activeLanguage === "km" ? "font-inter-khmer" : "font-poppins"}`}
-    >
+    <div className="rounded-2xl border border-white/10 bg-white/[0.03] p-5">
       <h2 className="text-sm font-semibold tracking-tight text-white/85 mb-3">
         {t("preview.title")}
       </h2>

@@ -17,8 +17,7 @@ export const AppHeader = ({
       initial={{ opacity: 0, y: -8 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.3 }}
-      className={`${activeLanguage === "km" ? "font-inter-khmer" : "font-poppins"}
-        border-b border-white/10 bg-[#070A12]/70 backdrop-blur-xl sticky top-0 z-50`}
+      className="border-b border-white/10 bg-[#070A12]/70 backdrop-blur-xl sticky top-0 z-50"
     >
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
         <div className="flex items-center gap-3 min-w-0">
@@ -57,4 +56,4 @@ export const AppHeader = ({
       </div>
     </motion.header>
   );
-}
+};

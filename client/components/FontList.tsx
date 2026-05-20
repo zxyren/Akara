@@ -34,17 +34,13 @@ export const FontList = ({
   ITEMS_PER_PAGE,
 }: FontListProps) => {
   const { t } = useI18n(activeLanguage);
-  const fontClass =
-    activeLanguage === "km" ? "font-inter-khmer" : "font-poppins";
   const totalPages = Math.ceil(filteredFonts.length / ITEMS_PER_PAGE);
   const startIndex = (currentPage - 1) * ITEMS_PER_PAGE;
   const endIndex = startIndex + ITEMS_PER_PAGE;
   const paginatedFonts = filteredFonts.slice(startIndex, endIndex);
 
   const EmptyCard = ({ children }: { children: React.ReactNode }) => (
-    <div
-      className={`${fontClass} flex min-h-[360px] items-center justify-center rounded-2xl border border-white/10 bg-white/[0.02] p-10 text-center`}
-    >
+    <div className="flex min-h-[360px] items-center justify-center rounded-2xl border border-white/10 bg-white/[0.02] p-10 text-center">
       {children}
     </div>
   );
@@ -91,7 +87,7 @@ export const FontList = ({
   }
 
   return (
-    <div className={`${fontClass} space-y-6`}>
+    <div className="space-y-6">
       <AnimatePresence mode="popLayout">
         {paginatedFonts.map((font, idx) => (
           <FontCard

@@ -26,9 +26,7 @@ export const UploadSection = ({
     "rounded-xl border border-white/10 bg-white/[0.03] p-4 text-center cursor-pointer transition-colors hover:border-white/15 hover:bg-white/[0.05]";
 
   return (
-    <div
-      className={`rounded-2xl border border-white/10 bg-white/[0.03] p-5 ${activeLanguage === "km" ? "font-inter-khmer" : "font-poppins"}`}
-    >
+    <div className="rounded-2xl border border-white/10 bg-white/[0.03] p-5">
       <h2 className="text-sm font-semibold tracking-tight text-white/85 mb-4">
         {t("upload.title")}
       </h2>
