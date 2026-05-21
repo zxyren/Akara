@@ -183,11 +183,7 @@ export default function FontPreview() {
       <footer className="border-t border-white/10 mt-12 sm:mt-14 bg-white/[0.02]">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
           <div className="flex flex-col items-center justify-center gap-3 text-center">
-            <img
-              src="/logo.png"
-              className="w-8 h-8 opacity-90"
-              alt="akara Logo"
-            />
+            <img src="/logo.png" className="w-8 h-8 opacity-90" alt="logo" />
             <p className="text-white/55 text-sm max-w-sm">{t("footer.text")}</p>
             <div className="flex flex-col sm:flex-row items-center justify-center gap-2 sm:gap-3 text-xs text-white/55">
               <div className="flex items-center gap-1">

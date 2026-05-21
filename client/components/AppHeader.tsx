@@ -21,12 +21,10 @@ export const AppHeader = ({
     >
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
         <div className="flex items-center gap-3 min-w-0">
-          <div className="h-10 w-10 rounded-xl border border-white/10 bg-white/[0.03] grid place-items-center overflow-hidden">
-            <img src="/logo.png" className="h-7 w-7" alt="Logo" />
-          </div>
+          <img src="/logo.png" className="h-9 w-9" alt="Logo" />
           <div className="min-w-0">
             <div className="text-sm font-semibold tracking-tight text-white/90 truncate">
-              {t("app.title")}
+              Abgs
             </div>
             <div className="text-xs text-white/55 truncate">
               {t("app.subtitle")}
